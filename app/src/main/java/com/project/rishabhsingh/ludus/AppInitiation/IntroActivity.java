@@ -1,4 +1,4 @@
-package com.project.rishabhsingh.ludus;
+package com.project.rishabhsingh.ludus.AppInitiation;
 
 import android.content.Intent;
 import android.support.annotation.Nullable;
@@ -7,6 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.github.paolorotolo.appintro.AppIntro;
+import com.project.rishabhsingh.ludus.AppDataPreferences;
+import com.project.rishabhsingh.ludus.CollegeChooserActivity;
+import com.project.rishabhsingh.ludus.LoginActivity;
+import com.project.rishabhsingh.ludus.R;
+import com.project.rishabhsingh.ludus.SampleSlide;
 
 public class IntroActivity extends AppIntro {
 
@@ -31,7 +36,7 @@ public class IntroActivity extends AppIntro {
     public void onDonePressed(Fragment currentFragment) {
         super.onDonePressed(currentFragment);
         AppDataPreferences.setIntroNeed(IntroActivity.this, false);
-        Intent i= new Intent(this,CollegeChooserActivity.class);
+        Intent i= new Intent(this,LoginActivity.class);
         startActivity(i);
     }
 

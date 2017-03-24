@@ -1,13 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_college_chooser"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.project.rishabhsingh.ludus.CollegeChooserActivity">
+    tools:context=".CollegeChooserActivity" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="State        :  "
+        android:textSize="30sp"
+        android:id="@+id/state"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="93dp" />
+
+    <Spinner
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerState"
+        android:layout_alignTop="@+id/state"
+        android:layout_toRightOf="@+id/state"
+        android:layout_toEndOf="@+id/state"
+        android:layout_alignBottom="@+id/state" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="College    :  "
+        android:textSize="30sp"
+        android:id="@+id/college"
+        android:textStyle="bold"
+        android:layout_below="@+id/state"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="84dp" />
+
+    <Spinner
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerCollege"
+        android:layout_toEndOf="@+id/college"
+        android:layout_toRightOf="@id/college"
+        android:layout_alignTop="@+id/college"
+        android:layout_alignBottom="@+id/college" />
+    <Button
+        style="?android:textAppearanceSmall"
+        android:layout_width="170dp"
+        android:layout_height="40dp"
+        android:text="Next"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:background="#126002"
+        android:textColor="#ffffff"
+        android:id="@+id/next_button"
+        android:layout_marginTop="54dp"
+        android:layout_below="@+id/college"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

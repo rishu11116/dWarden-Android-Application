@@ -1,3 +1,46 @@
 <resources>
     <string name="app_name">Ludus</string>
+
+    <string-array name="state">
+        <item>--Select--</item>
+        <item>Assam</item>
+        <item>Bihar</item>
+        <item>Punjab</item>
+        <item>Kerala</item>
+        <item>Gujarat</item>
+        <item>Uttar Pradesh</item>
+        <item>West Bengal</item>
+    </string-array>
+
+    <string-array name="blood_group">
+        <item>A+</item>
+        <item>A-</item>
+        <item>B+</item>
+        <item>B-</item>
+        <item>AB+</item>
+        <item>AB-</item>
+        <item>O+</item>
+        <item>O-</item>
+    </string-array>
+
+    <string-array name="degree_year">
+        <item>I</item>
+        <item>II</item>
+        <item>III</item>
+        <item>IV</item>
+        <item>V</item>
+        <item>VI</item>
+        <item>Final</item>
+    </string-array>
+
+    <string name="title_activity_login">SignIn</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">LogIn</string>
+    <string name="action_sign_in_short">LogIn</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
 </resources>

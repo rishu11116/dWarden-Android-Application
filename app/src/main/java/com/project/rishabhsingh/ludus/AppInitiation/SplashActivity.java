@@ -1,4 +1,4 @@
-package com.project.rishabhsingh.ludus;
+package com.project.rishabhsingh.ludus.AppInitiation;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -7,6 +7,12 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.view.ContextThemeWrapper;
+
+import com.project.rishabhsingh.ludus.AppDataPreferences;
+import com.project.rishabhsingh.ludus.AppInitiation.IntroActivity;
+import com.project.rishabhsingh.ludus.CollegeChooserActivity;
+import com.project.rishabhsingh.ludus.LoginActivity;
+import com.project.rishabhsingh.ludus.R;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -24,7 +30,7 @@ public class SplashActivity extends AppCompatActivity {
                     startActivity(new Intent(SplashActivity.this,IntroActivity.class));
                 }
                 else {
-                    startActivity(new Intent(SplashActivity.this,CollegeChooserActivity.class));
+                    startActivity(new Intent(SplashActivity.this,LoginActivity.class));
                 }
             }
         },2000);
