@@ -36,11 +36,16 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".CollegeChooserActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".LoginActivity" />
+        <activity
+            android:name=".SignUpActivity"
+            android:parentActivityName=".LoginActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".SignUpActivity" />
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login"></activity>
+            android:label="@string/title_activity_login"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

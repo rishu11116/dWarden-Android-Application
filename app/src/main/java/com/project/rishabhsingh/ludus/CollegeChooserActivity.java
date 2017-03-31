@@ -60,17 +60,16 @@ public class CollegeChooserActivity extends AppCompatActivity {
 
                 statePosition = position;
                 if (isSpinnerInitial) {
-                    state = String.valueOf(position);
+                    state = parent.getItemAtPosition(position).toString();
                     isSpinnerInitial = false;
-                    Toast.makeText(CollegeChooserActivity.this,state,Toast.LENGTH_SHORT).show();
                 } else {
                     if (position == 0) ;
                     else {
-                        state = String.valueOf(position);
-                        Toast.makeText(CollegeChooserActivity.this,state,Toast.LENGTH_SHORT).show();
+                        state = parent.getItemAtPosition(position).toString();
+                        Toast.makeText(getBaseContext(),state, Toast.LENGTH_SHORT).show();
                     }
                 }
-                if (state != null) {
+                if (!(statePosition<=0)) {
                     loadColleges();
                 }
             }
@@ -91,13 +90,12 @@ public class CollegeChooserActivity extends AppCompatActivity {
 
                 collegePosition = position;
                 if (isSpinnerInitial) {
-                    college = String.valueOf(position);
+                    college = parent.getItemAtPosition(position).toString();
                     isSpinnerInitial = false;
-                    Toast.makeText(CollegeChooserActivity.this,college,Toast.LENGTH_SHORT).show();
                 } else {
                     if (position == 0) ;
                     else {
-                        college = String.valueOf(position);
+                        college = parent.getItemAtPosition(position).toString();
                         Toast.makeText(CollegeChooserActivity.this,college,Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -138,7 +136,7 @@ public class CollegeChooserActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        // collegeAdapter.notifyDataSetChanged();
+                        collegeAdapter.notifyDataSetChanged();
                     }
                 },
                         new Response.ErrorListener() {

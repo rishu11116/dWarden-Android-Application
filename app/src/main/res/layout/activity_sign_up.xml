@@ -13,7 +13,7 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/signUpForm"
+            android:id="@+id/registrationForm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -31,8 +31,8 @@
                     android:hint="Roll Number"
                     android:maxLines="1"
                     android:maxLength="15"
-                    android:textColor="#fff"
-                    android:inputType="number|numberPassword|phone"/>
+                    android:textColor="#000"
+                    android:inputType="text"/>
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -45,8 +45,9 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/editName"
                     android:maxLines="1"
+                    android:inputType="textPersonName"
                     android:hint="Name"
-                    android:textColor="#fff"/>
+                    android:textColor="#000"/>
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -61,7 +62,7 @@
                     android:inputType="textEmailAddress"
                     android:hint="Email"
                     android:maxLines="1"
-                    android:textColor="#fff"/>
+                    android:textColor="#000"/>
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -72,10 +73,26 @@
                 <EditText
                     android:layout_width="304dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/editBranch"
+                    android:id="@+id/editCourse"
                     android:maxLines="1"
-                    android:hint="Branch"
-                    android:textColor="#fff"/>
+                    android:inputType="text"
+                    android:hint="Course"
+                    android:textColor="#000"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="324dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="10dp">
+                <EditText
+                    android:layout_width="304dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editSpecialization"
+                    android:maxLines="1"
+                    android:inputType="text"
+                    android:hint="Specialization"
+                    android:textColor="#000"/>
             </android.support.design.widget.TextInputLayout>
 
             <RelativeLayout
@@ -100,7 +117,7 @@
                     android:id="@+id/spinnerYear"
                     android:layout_alignTop="@+id/textYear"
                     android:layout_toRightOf="@+id/textYear"
-                    android:textColor="#fff"/>
+                    android:textColor="#000"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -125,7 +142,7 @@
                     android:id="@+id/spinnerHostel"
                     android:layout_alignTop="@+id/textHostel"
                     android:layout_toRightOf="@+id/textHostel"
-                    android:textColor="#fff"/>
+                    android:textColor="#000"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -150,7 +167,7 @@
                     android:id="@+id/spinnerBlood"
                     android:layout_alignTop="@+id/textBlood"
                     android:layout_toRightOf="@+id/textBlood"
-                    android:textColor="#fff"/>
+                    android:textColor="#000"/>
             </RelativeLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -162,10 +179,10 @@
                     android:layout_width="304dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/editPercentage"
-                    android:hint="Percentage(Last Session)"
+                    android:hint="Percentage (Last Session)"
                     android:maxLines="1"
                     android:maxLength="2"
-                    android:textColor="#fff"
+                    android:textColor="#000"
                     android:inputType="number|numberPassword|phone"/>
             </android.support.design.widget.TextInputLayout>
 
@@ -179,9 +196,9 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/editPassword"
                     android:inputType="textPassword"
-                    android:hint="Password(min 6 characters)"
+                    android:hint="Password (Atleast 6 characters)"
                     android:maxLines="1"
-                    android:textColor="#fff"
+                    android:textColor="#000"
                     />
             </android.support.design.widget.TextInputLayout>
 
@@ -190,6 +207,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_marginTop="10dp">
+
                 <EditText
                     android:layout_width="304dp"
                     android:layout_height="wrap_content"
@@ -197,8 +215,17 @@
                     android:inputType="textPassword"
                     android:hint="Confirm Password"
                     android:maxLines="1"
-                    android:textColor="#fff"/>
+                    android:textColor="#000"/>
             </android.support.design.widget.TextInputLayout>
+
+            <CheckBox
+                android:id="@+id/checkBoxBloodDonation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:checked="false"
+                android:layout_gravity="center_horizontal"
+                android:text="Can you donate blood in case of an emergency?" />
 
             <Button
                 style="?android:textAppearanceSmall"

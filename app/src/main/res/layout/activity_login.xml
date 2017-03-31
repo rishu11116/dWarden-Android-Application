@@ -80,7 +80,7 @@
                         android:imeActionId="@+id/login"
                         android:imeActionLabel="@string/action_sign_in_short"
                         android:imeOptions="actionDone"
-                        android:inputType="textPassword"
+                        android:inputType="textVisiblePassword"
                         android:maxLines="1"
                         android:textColor="#000"
                         android:textColorHint="#000000"
