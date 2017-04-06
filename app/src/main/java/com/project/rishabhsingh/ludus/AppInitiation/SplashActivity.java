@@ -10,7 +10,7 @@ import android.support.v7.view.ContextThemeWrapper;
 
 import com.project.rishabhsingh.ludus.AppDataPreferences;
 import com.project.rishabhsingh.ludus.AppInitiation.IntroActivity;
-import com.project.rishabhsingh.ludus.CollegeChooserActivity;
+import com.project.rishabhsingh.ludus.RegistrationActivity;
 import com.project.rishabhsingh.ludus.LoginActivity;
 import com.project.rishabhsingh.ludus.R;
 

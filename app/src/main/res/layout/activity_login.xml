@@ -30,7 +30,12 @@
         android:id="@+id/login_screen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="false">
+        android:fillViewport="false"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="45dp"
+        android:layout_marginStart="45dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -80,7 +85,7 @@
                         android:imeActionId="@+id/login"
                         android:imeActionLabel="@string/action_sign_in_short"
                         android:imeOptions="actionDone"
-                        android:inputType="textVisiblePassword"
+                        android:inputType="textPassword"
                         android:maxLines="1"
                         android:textColor="#000"
                         android:textColorHint="#000000"

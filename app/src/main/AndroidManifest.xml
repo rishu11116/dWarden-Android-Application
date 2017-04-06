@@ -35,7 +35,7 @@
             android:name=".AppInitiation.IntroActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".CollegeChooserActivity"
+            android:name=".RegistrationActivity"
             android:screenOrientation="portrait"
             android:parentActivityName=".LoginActivity" />
         <activity

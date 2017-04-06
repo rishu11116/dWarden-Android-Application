@@ -54,36 +54,6 @@
                 android:layout_width="324dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:layout_marginTop="10dp" >
-                <EditText
-                    android:layout_width="304dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/editEmail"
-                    android:inputType="textEmailAddress"
-                    android:hint="Email"
-                    android:maxLines="1"
-                    android:textColor="#000"/>
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="324dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="10dp">
-                <EditText
-                    android:layout_width="304dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/editCourse"
-                    android:maxLines="1"
-                    android:inputType="text"
-                    android:hint="Course"
-                    android:textColor="#000"/>
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="324dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="10dp">
                 <EditText
                     android:layout_width="304dp"
@@ -186,38 +156,6 @@
                     android:inputType="number|numberPassword|phone"/>
             </android.support.design.widget.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="324dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="10dp">
-                <EditText
-                    android:layout_width="304dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/editPassword"
-                    android:inputType="textPassword"
-                    android:hint="Password (Atleast 6 characters)"
-                    android:maxLines="1"
-                    android:textColor="#000"
-                    />
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="324dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="10dp">
-
-                <EditText
-                    android:layout_width="304dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/editConfirmPassword"
-                    android:inputType="textPassword"
-                    android:hint="Confirm Password"
-                    android:maxLines="1"
-                    android:textColor="#000"/>
-            </android.support.design.widget.TextInputLayout>
-
             <CheckBox
                 android:id="@+id/checkBoxBloodDonation"
                 android:layout_width="wrap_content"
@@ -233,13 +171,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="26dp"
                 android:layout_marginBottom="10dp"
-                android:text="Register"
+                android:text="Update"
                 android:textSize="20sp"
                 android:textStyle="bold|italic"
                 android:textAllCaps="false"
                 android:background="#128678"
                 android:textColor="#fff"
-                android:id="@+id/buttonRegister" />
+                android:id="@+id/buttonUpdate" />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
