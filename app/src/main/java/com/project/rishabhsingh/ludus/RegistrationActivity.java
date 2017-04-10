@@ -3,6 +3,7 @@ package com.project.rishabhsingh.ludus;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.util.ArrayMap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -37,7 +38,7 @@ import java.util.Map;
 public class RegistrationActivity extends AppCompatActivity {
 
     RequestQueue requestQueue;
-    String URL = "http://yokeshrana.herokuapp.com/api/register";
+    String URL = "http://192.168.2.13:8090/api/register";
     private EditText userName,email,password,confirmPassword;
     private boolean updateRequired=false;
     Button nextButton;
@@ -159,13 +160,13 @@ public class RegistrationActivity extends AppCompatActivity {
     private void registerTheStudent(String username, String useremail, String userpassword) {
 
         requestQueue = Volley.newRequestQueue(RegistrationActivity.this);
-        Map<String, String> param = new HashMap<String, String>();
-        param.put("authorization",PredefinedAttributes.AUTHORIZATION_TOKEN);
-        param.put("username",username);
-        param.put("emailid",useremail);
-        param.put("password",userpassword);
-        param.put("updaterequired",Boolean.toString(updateRequired));
-        JsonObjectRequest jor = new JsonObjectRequest(Request.Method.POST, URL, new JSONObject(param), new Response.Listener<JSONObject>() {
+//        Map<String, String> param = new HashMap<String, String>();
+//        param.put("username",username);
+//        param.put("emailid",useremail);
+//        param.put("password",userpassword);
+//        param.put("updaterequired",Boolean.toString(updateRequired));
+        String address = URL+"?username="+username+"&emailid="+useremail+"&password="+userpassword+"&updaterequired="+Boolean.toString(updateRequired);
+        JsonObjectRequest jor = new JsonObjectRequest(Request.Method.POST,address, new JSONObject(), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
                 try {
@@ -186,7 +187,6 @@ public class RegistrationActivity extends AppCompatActivity {
         },new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-
             }
         });
         requestQueue.add(jor);
