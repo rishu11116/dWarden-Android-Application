@@ -1,4 +1,4 @@
-package com.project.rishabhsingh.ludus;
+package com.project.rishabhsingh.dWarden;
 
 import android.content.Context;
 import android.preference.PreferenceManager;

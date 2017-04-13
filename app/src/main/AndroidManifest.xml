@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.project.rishabhsingh.ludus">
+    package="com.project.rishabhsingh.dWarden">
 
     <uses-permission
         android:name="android.permission.CAMERA"
@@ -23,7 +23,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".AppInitiation.SplashActivity"
+            android:name="com.project.rishabhsingh.dWarden.AppInitiation.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,18 +32,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AppInitiation.IntroActivity"
+            android:name="com.project.rishabhsingh.dWarden.AppInitiation.IntroActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".RegistrationActivity"
+            android:name="com.project.rishabhsingh.dWarden.RegistrationActivity"
             android:screenOrientation="portrait"
-            android:parentActivityName=".LoginActivity" />
+            android:parentActivityName="com.project.rishabhsingh.dWarden.LoginActivity" />
         <activity
-            android:name=".SignUpActivity"
-            android:parentActivityName=".LoginActivity"
+            android:name="com.project.rishabhsingh.dWarden.SignUpActivity"
+            android:parentActivityName="com.project.rishabhsingh.dWarden.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".LoginActivity"
+            android:name="com.project.rishabhsingh.dWarden.LoginActivity"
             android:label="@string/title_activity_login"
             android:screenOrientation="portrait"/>
     </application>

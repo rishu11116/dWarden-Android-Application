@@ -1,17 +1,15 @@
-package com.project.rishabhsingh.ludus.AppInitiation;
+package com.project.rishabhsingh.dWarden.AppInitiation;
 
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.github.paolorotolo.appintro.AppIntro;
-import com.project.rishabhsingh.ludus.AppDataPreferences;
-import com.project.rishabhsingh.ludus.RegistrationActivity;
-import com.project.rishabhsingh.ludus.LoginActivity;
-import com.project.rishabhsingh.ludus.R;
-import com.project.rishabhsingh.ludus.SampleSlide;
+import com.project.rishabhsingh.dWarden.AppDataPreferences;
+import com.project.rishabhsingh.dWarden.LoginActivity;
+import com.project.rishabhsingh.dWarden.R;
+import com.project.rishabhsingh.dWarden.SampleSlide;
 
 public class IntroActivity extends AppIntro {
 

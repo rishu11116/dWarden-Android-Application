@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ludus</string>
+    <string name="app_name">dWarden</string>
     <string-array name="blood_group">
         <item>--Select--</item>
         <item>A+</item>
