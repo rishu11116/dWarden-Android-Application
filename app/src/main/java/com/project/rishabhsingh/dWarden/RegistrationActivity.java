@@ -14,20 +14,25 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class RegistrationActivity extends AppCompatActivity {
 
     RequestQueue requestQueue;
-    String URL = "http://192.168.2.13:8090/api/register";
+    String URL = "http://yokeshrana.herokuapp.com/api/register";
     private EditText userName,email,password,confirmPassword;
     private boolean updateRequired=false;
     Button nextButton;
@@ -146,19 +151,14 @@ public class RegistrationActivity extends AppCompatActivity {
         }
     }
 
-    private void registerTheStudent(String username, String useremail, String userpassword) {
+    private void registerTheStudent(final String username,final String useremail,final String userpassword) {
 
         requestQueue = Volley.newRequestQueue(RegistrationActivity.this);
-//        Map<String, String> param = new HashMap<String, String>();
-//        param.put("username",username);
-//        param.put("emailid",useremail);
-//        param.put("password",userpassword);
-//        param.put("updaterequired",Boolean.toString(updateRequired));
-        String address = URL+"?username="+username+"&emailid="+useremail+"&password="+userpassword+"&updaterequired="+Boolean.toString(updateRequired);
-        JsonObjectRequest jor = new JsonObjectRequest(Request.Method.POST,address, new JSONObject(), new Response.Listener<JSONObject>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,URL,new Response.Listener<String>() {
             @Override
-            public void onResponse(JSONObject jsonObject) {
+            public void onResponse(String response) {
                 try {
+                    JSONObject jsonObject = new JSONObject(response);
                     result = jsonObject.getString("created");
                     token=jsonObject.getString("token");
                     if(result.equals("false")) {
@@ -177,7 +177,26 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
             }
-        });
-        requestQueue.add(jor);
+        })
+        {
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String,String>();
+                params.put("username",username);
+                params.put("emailid",useremail);
+                params.put("password",userpassword);
+                params.put("updaterequired",Boolean.toString(updateRequired));
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("Content-Type","application/x-www-form-urlencoded");
+                params.put("authorization","token ce3fe9a203703c7ea3da8727ff8fbafec8ddbf44");
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
     }
 }

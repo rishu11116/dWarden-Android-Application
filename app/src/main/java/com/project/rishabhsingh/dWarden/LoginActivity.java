@@ -15,11 +15,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
@@ -30,11 +32,11 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity{
 
-    String URL = "http://www.gyuhghkgjkjkl";
+    String URL = "http://yokeshrana.herokuapp.com/api/login";
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private Button register,signIn;
-    String result;
+    String created;
     public static String token;
 
     @Override
@@ -134,15 +136,13 @@ public class LoginActivity extends AppCompatActivity{
     private void startLogin(final String email,final String password) {
 
         final RequestQueue requestQueue = Volley.newRequestQueue(LoginActivity.this);
-        Map<String, String> param = new HashMap<String, String>();
-        param.put("email", email);
-        param.put("password", password);
-        JsonObjectRequest jor = new JsonObjectRequest(Request.Method.POST,URL, new JSONObject(param), new Response.Listener<JSONObject>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,URL,new Response.Listener<String>() {
             @Override
-            public void onResponse(JSONObject jsonObject) {
+            public void onResponse(String response) {
                 try {
-                    result=jsonObject.getString("result");
-                    if (result.equals("success")) {
+                    JSONObject jsonObject = new JSONObject(response);
+                    created=jsonObject.getString("created");
+                    if (created.equals("true")) {
                         token = jsonObject.getString("token");
                         AppDataPreferences.setToken(LoginActivity.this,token);
                         Toast.makeText(LoginActivity.this, "Login Successful",Toast.LENGTH_SHORT).show();
@@ -162,7 +162,24 @@ public class LoginActivity extends AppCompatActivity{
             public void onErrorResponse(VolleyError volleyError) {
 
             }
-        });
-        requestQueue.add(jor);
+        })
+        {
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String,String>();
+                params.put("username",email);
+                params.put("password",password);
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("Content-Type","application/x-www-form-urlencoded");
+                params.put("authorization","token ce3fe9a203703c7ea3da8727ff8fbafec8ddbf44");
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
     }
 }

@@ -19,11 +19,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
@@ -34,7 +36,7 @@ import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private static String URL = "https://bkjbhckjhkjgfdgd";
+    private static String URL = "http://yokeshrana.herokuapp.com/api/";
     private EditText rollNo, name, specialization,  percentage;
     private CheckBox checkBoxBloodDonation;
     private Button updateButton;
@@ -45,7 +47,7 @@ public class SignUpActivity extends AppCompatActivity {
     public static String year = null, hostel = null, bloodGroup = null, canDonateBlood = null;
     int yearPosition=0, hostelPosition=0, bloodPosition=0;
     LinearLayout registrationLayout;
-    private String error,result;
+    private String result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -256,27 +258,17 @@ public class SignUpActivity extends AppCompatActivity {
             }
     }
 
-    private void updateTheStudent(String userRoll, String userName,String userSpecialization,
-                                    String userPercentage) {
+    private void updateTheStudent(final String userRoll,final String userName,final String userSpecialization,final String userPercentage) {
 
             requestQueue = Volley.newRequestQueue(SignUpActivity.this);
-            Map<String, String> param = new HashMap<String, String>();
-            param.put("rollno", userRoll);
-            param.put("name", userName);
-            param.put("specialization", userSpecialization);
-            param.put("year", year);
-            param.put("hostel", hostel);
-            param.put("bloodgroup", bloodGroup);
-            param.put("percentage", userPercentage);
-            param.put("BloodDonation",canDonateBlood);
-            JsonObjectRequest jor = new JsonObjectRequest(Request.Method.POST, URL, new JSONObject(param), new Response.Listener<JSONObject>() {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
                 @Override
-                public void onResponse(JSONObject jsonObject) {
+                public void onResponse(String response) {
                     try {
+                        JSONObject jsonObject = new JSONObject(response);
                         result= jsonObject.getString("result");
                         if(result.equals("fail")) {
-                            error = jsonObject.getString("error");
-                            Toast.makeText(SignUpActivity.this, "Registration failed!!",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUpActivity.this, "Updation of your details failed!!",Toast.LENGTH_SHORT).show();
                         }
                         else {
                             Toast.makeText(SignUpActivity.this, "Congrats,You are now successfully registered with us.", Toast.LENGTH_LONG).show();
@@ -288,12 +280,35 @@ public class SignUpActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-            }, new Response.ErrorListener() {
+            },new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
                 }
-            });
-            requestQueue.add(jor);
+            })
+            {
+                @Override
+                protected Map<String,String> getParams(){
+                    Map<String,String> params = new HashMap<String,String>();
+                    params.put("rollno", userRoll);
+                    params.put("name", userName);
+                    params.put("specialization", userSpecialization);
+                    params.put("year", year);
+                    params.put("hostel", hostel);
+                    params.put("bloodgroup", bloodGroup);
+                    params.put("percentage", userPercentage);
+                    params.put("BloodDonation",canDonateBlood);
+                    return params;
+                }
+
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String,String> params = new HashMap<String, String>();
+                    params.put("Content-Type","application/x-www-form-urlencoded");
+                    params.put("authorization","token ce3fe9a203703c7ea3da8727ff8fbafec8ddbf44");
+                    return params;
+                }
+            };
+            requestQueue.add(stringRequest);
         }
 
     @Override
