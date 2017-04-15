@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Base64;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,11 +34,11 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity{
 
-    String URL = "http://yokeshrana.herokuapp.com/api/login";
+    String URL = "http://192.168.2.13:8000/api/login/";
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private Button register,signIn;
-    String created;
+    String result;
     public static String token;
 
     @Override
@@ -68,7 +70,11 @@ public class LoginActivity extends AppCompatActivity{
         signIn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin();
+                try {
+                    attemptLogin();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -82,7 +88,7 @@ public class LoginActivity extends AppCompatActivity{
         });
     }
 
-    private void attemptLogin() {
+    private void attemptLogin() throws JSONException {
 
         mEmailView.setError(null);
         mPasswordView.setError(null);
@@ -126,49 +132,45 @@ public class LoginActivity extends AppCompatActivity{
     }
 
     private boolean isEmailValid(String email) {
-        return (email.contains("@") && email.length()< 16);
+        return true;
     }
 
     private boolean isPasswordValid(String password) {
-        return password.length() > 5;
+        return password.length() > 2;
     }
 
-    private void startLogin(final String email,final String password) {
 
-        final RequestQueue requestQueue = Volley.newRequestQueue(LoginActivity.this);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,URL,new Response.Listener<String>() {
+
+
+
+    private void startLogin(final String email,final String password) throws JSONException {
+
+        RequestQueue rq = Volley.newRequestQueue(LoginActivity.this);
+        StringRequest sr = new StringRequest(Request.Method.POST,"http://hmsonline.herokuapp.com/api/login", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+
                 try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    created=jsonObject.getString("created");
-                    if (created.equals("true")) {
-                        token = jsonObject.getString("token");
-                        AppDataPreferences.setToken(LoginActivity.this,token);
-                        Toast.makeText(LoginActivity.this, "Login Successful",Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        Toast.makeText(LoginActivity.this, "Invalid login details", Toast.LENGTH_SHORT).show();
-                        mEmailView.setText("");
-                        mPasswordView.setText("");
-                        mEmailView.requestFocus();
-                    }
+                    JSONObject json = new JSONObject(" "+response.toString()+" ");
+
+
+                    Toast.makeText(LoginActivity.this, json.toString(), Toast.LENGTH_SHORT).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
             }
         }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError volleyError) {
-
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(LoginActivity.this,error.toString(), Toast.LENGTH_SHORT).show();
             }
-        })
-        {
+        }){
             @Override
             protected Map<String,String> getParams(){
-                Map<String,String> params = new HashMap<String,String>();
-                params.put("username",email);
-                params.put("password",password);
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("username",email.toString());
+                params.put("password",password.toString());
                 return params;
             }
 
@@ -180,6 +182,9 @@ public class LoginActivity extends AppCompatActivity{
                 return params;
             }
         };
-        requestQueue.add(stringRequest);
+        rq.add(sr);
+
+
+
     }
 }
