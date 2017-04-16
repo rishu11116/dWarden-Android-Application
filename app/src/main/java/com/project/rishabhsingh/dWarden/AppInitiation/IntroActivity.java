@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.github.paolorotolo.appintro.AppIntro;
 import com.project.rishabhsingh.dWarden.AppDataPreferences;
+import com.project.rishabhsingh.dWarden.HomePageActivity;
 import com.project.rishabhsingh.dWarden.LoginActivity;
 import com.project.rishabhsingh.dWarden.R;
 import com.project.rishabhsingh.dWarden.SampleSlide;
@@ -36,6 +37,7 @@ public class IntroActivity extends AppIntro {
         AppDataPreferences.setIntroNeed(IntroActivity.this, false);
         Intent i= new Intent(this,LoginActivity.class);
         startActivity(i);
+        finish();
     }
 
     @Override

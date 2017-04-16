@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.view.ContextThemeWrapper;
 
 import com.project.rishabhsingh.dWarden.AppDataPreferences;
+import com.project.rishabhsingh.dWarden.HomePageActivity;
 import com.project.rishabhsingh.dWarden.LoginActivity;
 import com.project.rishabhsingh.dWarden.R;
 
@@ -26,9 +27,18 @@ public class SplashActivity extends AppCompatActivity {
 
                 if(AppDataPreferences.isIntroNeeded(SplashActivity.this)) {
                     startActivity(new Intent(SplashActivity.this,IntroActivity.class));
+                    finish();
                 }
                 else {
-                    startActivity(new Intent(SplashActivity.this,LoginActivity.class));
+                    if(AppDataPreferences.isTokenSet(SplashActivity.this)) {
+                        startActivity(new Intent(SplashActivity.this, HomePageActivity.class));
+                        finish();
+                    }
+                    else
+                    {
+                        startActivity(new Intent(SplashActivity.this,LoginActivity.class));
+                        finish();
+                    }
                 }
             }
         },2000);

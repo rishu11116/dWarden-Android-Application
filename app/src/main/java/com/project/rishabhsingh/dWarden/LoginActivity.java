@@ -32,11 +32,11 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity{
 
-    String URL = "http://yokeshrana.herokuapp.com/api/login";
+    String URL = "http://hmsonline.herokuapp.com/api/login";
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private Button register,signIn;
-    String created;
+    String status;
     public static String token;
 
     @Override
@@ -78,6 +78,7 @@ public class LoginActivity extends AppCompatActivity{
             public void onClick(View v) {
                 Intent i = new Intent(LoginActivity.this,RegistrationActivity.class);
                 startActivity(i);
+                finish();
             }
         });
     }
@@ -126,7 +127,7 @@ public class LoginActivity extends AppCompatActivity{
     }
 
     private boolean isEmailValid(String email) {
-        return (email.contains("@") && email.length()< 16);
+        return (email.contains("@"));
     }
 
     private boolean isPasswordValid(String password) {
@@ -141,11 +142,13 @@ public class LoginActivity extends AppCompatActivity{
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    created=jsonObject.getString("created");
-                    if (created.equals("true")) {
+                    status=jsonObject.getString("status");
+                    if (status.equals("true")) {
                         token = jsonObject.getString("token");
                         AppDataPreferences.setToken(LoginActivity.this,token);
                         Toast.makeText(LoginActivity.this, "Login Successful",Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(LoginActivity.this,HomePageActivity.class));
+                        finish();
                     }
                     else {
                         Toast.makeText(LoginActivity.this, "Invalid login details", Toast.LENGTH_SHORT).show();

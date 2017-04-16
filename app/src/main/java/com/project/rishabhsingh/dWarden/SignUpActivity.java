@@ -36,7 +36,7 @@ import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private static String URL = "http://yokeshrana.herokuapp.com/api/";
+    private static String URL = "http://hmsonline.herokuapp.com/api/";
     private EditText rollNo, name, specialization,  percentage;
     private CheckBox checkBoxBloodDonation;
     private Button updateButton;
@@ -274,6 +274,7 @@ public class SignUpActivity extends AppCompatActivity {
                             Toast.makeText(SignUpActivity.this, "Congrats,You are now successfully registered with us.", Toast.LENGTH_LONG).show();
                             Intent i = new Intent(SignUpActivity.this,LoginActivity.class);
                             startActivity(i);
+                            finish();
                         }
                         finish();
                     } catch (JSONException e) {

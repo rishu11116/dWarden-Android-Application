@@ -32,11 +32,11 @@ import java.util.Map;
 public class RegistrationActivity extends AppCompatActivity {
 
     RequestQueue requestQueue;
-    String URL = "http://yokeshrana.herokuapp.com/api/register";
+    String URL = "http://hmsonline.herokuapp.com/api/register";
     private EditText userName,email,password,confirmPassword;
     private boolean updateRequired=false;
     Button nextButton;
-    String result;
+    String created;
     public static String token;
 
     @Override
@@ -118,9 +118,9 @@ public class RegistrationActivity extends AppCompatActivity {
             focusView = userName;
         }
 
-        else if (TextUtils.isEmpty(editUserEmail)) {
+        else if (TextUtils.isEmpty(editUserEmail) || (!editUserEmail.contains("@"))) {
             cancel=true;
-            email.setError("Please enter your Email");
+            email.setError("Please enter a valid Email");
             focusView = email;
         }
 
@@ -159,14 +159,15 @@ public class RegistrationActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    result = jsonObject.getString("created");
+                    created = jsonObject.getString("created");
                     token=jsonObject.getString("token");
-                    if(result.equals("false")) {
+                    if(created.equals("false")) {
                         Toast.makeText(RegistrationActivity.this, "Registration failed!!",Toast.LENGTH_SHORT).show();
                     }
                     else {
                         Toast.makeText(RegistrationActivity.this, "Please update your details.", Toast.LENGTH_LONG).show();
                         startActivity(new Intent(RegistrationActivity.this,SignUpActivity.class));
+                        finish();
                     }
                     finish();
                 } catch (JSONException e) {

@@ -27,7 +27,12 @@ public class AppDataPreferences {
     public static void setToken(Context context, String token){
         PreferenceManager.getDefaultSharedPreferences(context)
                 .edit()
-                .putString(PREF_TOKEN_KEY, token)
+                .putString(PREF_TOKEN_KEY,token)
                 .apply();
+    }
+
+    public static boolean isTokenSet(Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context)
+                .getString(PREF_TOKEN_KEY,null)!=null;
     }
 }

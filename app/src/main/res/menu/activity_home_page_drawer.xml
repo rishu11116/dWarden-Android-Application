@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/nav_profile"
+            android:title="My Profile" />
+        <item
+            android:id="@+id/nav_roomBooking"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Book a room" />
+        <item
+            android:id="@+id/nav_bloodNeed"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Need for blood" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Settings" />
+        <item
+            android:id="@+id/nav_developers"
+            android:icon="@drawable/nav_developers"
+            android:title="Developers" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/nav_logout"
+            android:title="Logout" />
+    </group>
+</menu>
