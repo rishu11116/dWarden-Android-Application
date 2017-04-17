@@ -1,10 +1,12 @@
 package com.project.rishabhsingh.dWarden;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -36,23 +38,25 @@ import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private static String URL = "http://hmsonline.herokuapp.com/api/";
+    private static String URL = AppDataPreferences.URL+"student";
     private EditText rollNo, name, specialization,  percentage;
     private CheckBox checkBoxBloodDonation;
     private Button updateButton;
-    RequestQueue requestQueue;
+    private RequestQueue requestQueue;
     private boolean isSpinnerInitial = true;
-    Spinner spinner;
-    ArrayAdapter<CharSequence> staticAdapter;
-    public static String year = null, hostel = null, bloodGroup = null, canDonateBlood = null;
-    int yearPosition=0, hostelPosition=0, bloodPosition=0;
-    LinearLayout registrationLayout;
-    private String result;
+    private Spinner spinner;
+    private ArrayAdapter<CharSequence> staticAdapter;
+    private static String year = null, hostel = null, bloodGroup = null, canDonateBlood = null;
+    private int yearPosition=0, hostelPosition=0, bloodPosition=0;
+    private LinearLayout registrationLayout;
+    private String result,emailId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
+        emailId=getIntent().getStringExtra("Email");
 
         registrationLayout=(LinearLayout)findViewById(R.id.registrationForm);
 
@@ -260,22 +264,32 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void updateTheStudent(final String userRoll,final String userName,final String userSpecialization,final String userPercentage) {
 
+        final ProgressDialog progressDialog = new ProgressDialog(SignUpActivity.this,R.style.AppTheme_Dark_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Updating details...");
+        progressDialog.show();
+
             requestQueue = Volley.newRequestQueue(SignUpActivity.this);
             StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     try {
                         JSONObject jsonObject = new JSONObject(response);
+                        Toast.makeText(SignUpActivity.this,jsonObject.toString(),Toast.LENGTH_SHORT).show();
                         result= jsonObject.getString("result");
-                        if(result.equals("fail")) {
-                            Toast.makeText(SignUpActivity.this, "Updation of your details failed!!",Toast.LENGTH_SHORT).show();
-                        }
-                        else {
-                            Toast.makeText(SignUpActivity.this, "Congrats,You are now successfully registered with us.", Toast.LENGTH_LONG).show();
-                            Intent i = new Intent(SignUpActivity.this,LoginActivity.class);
-                            startActivity(i);
-                            finish();
-                        }
+//                        if(result.equals("fail")) {
+//                            Toast.makeText(SignUpActivity.this, "Updation of your details failed!!",Toast.LENGTH_SHORT).show();
+//                            progressDialog.setMessage("Updation failed!");
+//                            progressDialog.dismiss();
+//                        }
+//                        else {
+//                            Toast.makeText(SignUpActivity.this, "Congrats,You are now successfully registered with us.", Toast.LENGTH_LONG).show();
+//                            Intent i = new Intent(SignUpActivity.this,LoginActivity.class);
+//                            startActivity(i);
+//                            finish();
+//                            progressDialog.setMessage("Details updated!");
+//                            progressDialog.dismiss();
+//                        }
                         finish();
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -290,14 +304,18 @@ public class SignUpActivity extends AppCompatActivity {
                 @Override
                 protected Map<String,String> getParams(){
                     Map<String,String> params = new HashMap<String,String>();
-                    params.put("rollno", userRoll);
-                    params.put("name", userName);
-                    params.put("specialization", userSpecialization);
-                    params.put("year", year);
-                    params.put("hostel", hostel);
-                    params.put("bloodgroup", bloodGroup);
-                    params.put("percentage", userPercentage);
-                    params.put("BloodDonation",canDonateBlood);
+                    params.put("statename","Uttar Pradesh");
+                    params.put("collegename","BIET Jhansi");
+                    params.put("hostelname", hostel);
+                    params.put("branchname", userSpecialization);
+                    params.put("studentname", userName);
+                    params.put("studentrollno", userRoll);
+                    params.put("studentemailid", emailId);
+                    params.put("studentpercentage", userPercentage);
+                    params.put("studentbloodgp", bloodGroup);
+                    params.put("studentyear", year);
+                    params.put("studentroomno", "Not Allocated");
+                    params.put("candonateblood", canDonateBlood);
                     return params;
                 }
 

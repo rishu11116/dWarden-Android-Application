@@ -101,24 +101,21 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="26dp"
                     android:text="@string/action_sign_in"
-                    android:textStyle="italic|bold"
                     android:background="#68f24c"
                     android:textColor="#f21212" />
 
             </LinearLayout>
-            <Button
-                android:layout_width="200dp"
+            <TextView
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:textSize="20sp"
+                android:textSize="22sp"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Register"
-                android:textStyle="bold|italic"
-                android:id="@+id/register_button"
+                android:text="No account yet?Create one"
+                android:id="@+id/register_textView"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
-                android:background="#b8aae1"
-                android:textColor="#000000" />
+                android:textColor="#ff0202" />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

@@ -1,5 +1,6 @@
 package com.project.rishabhsingh.dWarden;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 
@@ -32,12 +33,13 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity{
 
-    String URL = "http://hmsonline.herokuapp.com/api/login";
+    private static String URL = AppDataPreferences.URL+"login";
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
-    private Button register,signIn;
-    String status;
-    public static String token;
+    private Button signIn;
+    private TextView register;
+    private String status;
+    private static String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,13 +74,12 @@ public class LoginActivity extends AppCompatActivity{
             }
         });
 
-        register = (Button)findViewById(R.id.register_button);
+        register = (TextView)findViewById(R.id.register_textView);
         register.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(LoginActivity.this,RegistrationActivity.class);
                 startActivity(i);
-                finish();
             }
         });
     }
@@ -136,6 +137,11 @@ public class LoginActivity extends AppCompatActivity{
 
     private void startLogin(final String email,final String password) {
 
+        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,R.style.AppTheme_Dark_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Authenticating...");
+        progressDialog.show();
+
         final RequestQueue requestQueue = Volley.newRequestQueue(LoginActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST,URL,new Response.Listener<String>() {
             @Override
@@ -149,12 +155,16 @@ public class LoginActivity extends AppCompatActivity{
                         Toast.makeText(LoginActivity.this, "Login Successful",Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(LoginActivity.this,HomePageActivity.class));
                         finish();
+                        progressDialog.setMessage("Authentication approved!");
+                        progressDialog.dismiss();
                     }
                     else {
                         Toast.makeText(LoginActivity.this, "Invalid login details", Toast.LENGTH_SHORT).show();
                         mEmailView.setText("");
                         mPasswordView.setText("");
                         mEmailView.requestFocus();
+                        progressDialog.setMessage("Authentication failed!");
+                        progressDialog.dismiss();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

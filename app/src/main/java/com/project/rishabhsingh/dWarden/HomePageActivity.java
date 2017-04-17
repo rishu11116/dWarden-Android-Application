@@ -77,15 +77,20 @@ public class HomePageActivity extends AppCompatActivity
 
         if (id == R.id.nav_profile) {
 
-        } else if (id == R.id.nav_roomBooking) {
+        }
+        else if (id == R.id.nav_roomBooking) {
+            startActivity(new Intent(HomePageActivity.this,RoomBookingActivity.class));
+        }
+        else if (id == R.id.nav_bloodNeed) {
 
-        } else if (id == R.id.nav_bloodNeed) {
+        }
+        else if (id == R.id.nav_settings) {
 
-        } else if (id == R.id.nav_settings) {
+        }
+        else if (id == R.id.nav_developers) {
 
-        } else if (id == R.id.nav_developers) {
-
-        } else if (id == R.id.nav_logout) {
+        }
+        else if (id == R.id.nav_logout) {
             AppDataPreferences.setToken(HomePageActivity.this,null);
             startActivity(new Intent(HomePageActivity.this,LoginActivity.class));
             finish();

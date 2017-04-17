@@ -1,5 +1,6 @@
 package com.project.rishabhsingh.dWarden;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -32,7 +33,7 @@ import java.util.Map;
 public class RegistrationActivity extends AppCompatActivity {
 
     RequestQueue requestQueue;
-    String URL = "http://hmsonline.herokuapp.com/api/register";
+    private static String URL = AppDataPreferences.URL+"register";
     private EditText userName,email,password,confirmPassword;
     private boolean updateRequired=false;
     Button nextButton;
@@ -153,6 +154,11 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private void registerTheStudent(final String username,final String useremail,final String userpassword) {
 
+        final ProgressDialog progressDialog = new ProgressDialog(RegistrationActivity.this,R.style.AppTheme_Dark_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Creating account...");
+        progressDialog.show();
+
         requestQueue = Volley.newRequestQueue(RegistrationActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST,URL,new Response.Listener<String>() {
             @Override
@@ -163,11 +169,17 @@ public class RegistrationActivity extends AppCompatActivity {
                     token=jsonObject.getString("token");
                     if(created.equals("false")) {
                         Toast.makeText(RegistrationActivity.this, "Registration failed!!",Toast.LENGTH_SHORT).show();
+                        progressDialog.setMessage("Registration failed!");
+                        progressDialog.dismiss();
                     }
                     else {
                         Toast.makeText(RegistrationActivity.this, "Please update your details.", Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(RegistrationActivity.this,SignUpActivity.class));
+                        Intent intent = new Intent(RegistrationActivity.this,SignUpActivity.class);
+                        intent.putExtra("Email",useremail);
+                        startActivity(intent);
                         finish();
+                        progressDialog.setMessage("Account created!");
+                        progressDialog.dismiss();
                     }
                     finish();
                 } catch (JSONException e) {

@@ -35,8 +35,7 @@ public class IntroActivity extends AppIntro {
     public void onDonePressed(Fragment currentFragment) {
         super.onDonePressed(currentFragment);
         AppDataPreferences.setIntroNeed(IntroActivity.this, false);
-        Intent i= new Intent(this,LoginActivity.class);
-        startActivity(i);
+        startActivity(new Intent(IntroActivity.this,LoginActivity.class));
         finish();
     }
 
