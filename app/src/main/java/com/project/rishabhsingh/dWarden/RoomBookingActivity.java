@@ -1,16 +1,14 @@
 package com.project.rishabhsingh.dWarden;
 
-import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -34,13 +32,14 @@ import java.util.Map;
 
 public class RoomBookingActivity extends AppCompatActivity {
 
-    private static String URL = AppDataPreferences.URL + "hostelallot";
+    private static String URLTrying = AppDataPreferences.URL + "hostelallot";
+    private static String URLAutomated = AppDataPreferences.URL + "";
     private EditText choice1Room, choice2Room, choice3Room, choice4Room, choice5Room, choice6Room, choice7Room, choice8Room, choice9Room, choice10Room;
     private String choice1Floor, choice2Floor, choice3Floor, choice4Floor, choice5Floor, choice6Floor, choice7Floor, choice8Floor, choice9Floor, choice10Floor;
     private String choice1, choice2, choice3, choice4, choice5, choice6, choice7, choice8, choice9, choice10;
     private RadioGroup radioGroup1,radioGroup2,radioGroup3,radioGroup4,radioGroup5,radioGroup6,radioGroup7,radioGroup8,radioGroup9,radioGroup10;
     private Button checkAvailabilityButton;
-    private String status;
+    private String status,duplicate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -429,49 +428,69 @@ public class RoomBookingActivity extends AppCompatActivity {
                                     final String choice5, final String choice6, final String choice7, final String choice8,
                                     final String choice9, final String choice10) {
         final RequestQueue requestQueue = Volley.newRequestQueue(RoomBookingActivity.this);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URLTrying, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    Toast.makeText(RoomBookingActivity.this,jsonObject.toString(),Toast.LENGTH_SHORT).show();
                     status=jsonObject.getString("status");
+                    duplicate=jsonObject.getString("duplicate");
                     if(status.equals("null")) {
-
+                        if(duplicate.equals("yes")) {
+                            final AlertDialog alertDialog = new AlertDialog.Builder(RoomBookingActivity.this).create();
+                            alertDialog.setTitle("Warning!!!");
+                            alertDialog.setMessage("Sorry!!You have been already allotted a room in your hostel.Now,you cannot book another room for yourself.");
+                            alertDialog.setIcon(R.drawable.wrong_warning);
+                            alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    alertDialog.dismiss();
+                                    startActivity(new Intent(RoomBookingActivity.this, HomePageActivity.class));
+                                }
+                            });
+                        } else {
+                            final AlertDialog alertDialog = new AlertDialog.Builder(RoomBookingActivity.this).create();
+                            alertDialog.setTitle("Warning!!!");
+                            alertDialog.setIcon(R.drawable.wrong_warning);
+                            alertDialog.setMessage("Oops!!There seems to be a problem with your room allotment.None of your preferred rooms is available.Should I search a room available for you or are you gonna try once more to fill your preferences ?");
+                            alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Search", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    alertDialog.dismiss();
+                                    clearPreferences();
+                                    automatedSearch();
+                                }
+                            });
+                            alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Let me try", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    alertDialog.dismiss();
+                                    clearPreferences();
+                                }
+                            });
+                            alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL, "Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    alertDialog.dismiss();
+                                }
+                            });
+                            alertDialog.show();
+                        }
                     }
                     else {
+                        clearPreferences();
                         final AlertDialog alertDialog = new AlertDialog.Builder(RoomBookingActivity.this).create();
-                        alertDialog.setTitle("Congratulations !!");
+                        alertDialog.setTitle("Congratulations!!!");
                         alertDialog.setMessage("Room "+status+" is successfully allotted to you.You can now enjoy your hostel life in this new room.");
-                        alertDialog.setIcon(R.drawable.tick);
+                        alertDialog.setIcon(R.drawable.right_tick);
                         alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 alertDialog.dismiss();
+                                startActivity(new Intent(RoomBookingActivity.this,HomePageActivity.class));
                             }
                         });
                         alertDialog.show();
-                        choice1Room.setText("");
-                        choice2Room.setText("");
-                        choice3Room.setText("");
-                        choice4Room.setText("");
-                        choice5Room.setText("");
-                        choice6Room.setText("");
-                        choice7Room.setText("");
-                        choice8Room.setText("");
-                        choice9Room.setText("");
-                        choice10Room.setText("");
-                        choice1Room.requestFocus();
-                        radioGroup1.clearCheck();
-                        radioGroup2.clearCheck();
-                        radioGroup3.clearCheck();
-                        radioGroup4.clearCheck();
-                        radioGroup5.clearCheck();
-                        radioGroup6.clearCheck();
-                        radioGroup7.clearCheck();
-                        radioGroup8.clearCheck();
-                        radioGroup9.clearCheck();
-                        radioGroup10.clearCheck();
                     }
                 } catch(JSONException e){
                     e.printStackTrace();
@@ -500,6 +519,77 @@ public class RoomBookingActivity extends AppCompatActivity {
                 return params;
             }
 
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                params.put("authorization", "token ce3fe9a203703c7ea3da8727ff8fbafec8ddbf44");
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+
+    private void clearPreferences() {
+        choice1Room.setText("");
+        choice2Room.setText("");
+        choice3Room.setText("");
+        choice4Room.setText("");
+        choice5Room.setText("");
+        choice6Room.setText("");
+        choice7Room.setText("");
+        choice8Room.setText("");
+        choice9Room.setText("");
+        choice10Room.setText("");
+        choice1Room.requestFocus();
+        radioGroup1.clearCheck();
+        radioGroup2.clearCheck();
+        radioGroup3.clearCheck();
+        radioGroup4.clearCheck();
+        radioGroup5.clearCheck();
+        radioGroup6.clearCheck();
+        radioGroup7.clearCheck();
+        radioGroup8.clearCheck();
+        radioGroup9.clearCheck();
+        radioGroup10.clearCheck();
+    }
+
+    private void automatedSearch() {
+        final RequestQueue requestQueue = Volley.newRequestQueue(RoomBookingActivity.this);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URLAutomated, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject= new JSONObject(response);
+                    status = jsonObject.getString("status");
+                    final AlertDialog alertDialog = new AlertDialog.Builder(RoomBookingActivity.this).create();
+                    alertDialog.setTitle("Congratulations!!!");
+                    alertDialog.setMessage("Room "+status+" is successfully allotted to you.You can now enjoy your hostel life in this new room.");
+                    alertDialog.setIcon(R.drawable.right_tick);
+                    alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            alertDialog.dismiss();
+                            startActivity(new Intent(RoomBookingActivity.this,HomePageActivity.class));
+                        }
+                    });
+                    alertDialog.show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("studentrollno", AppDataPreferences.studentRollNo);
+                return params;
+            }
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
