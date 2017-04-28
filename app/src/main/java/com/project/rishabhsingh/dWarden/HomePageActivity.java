@@ -1,6 +1,7 @@
 package com.project.rishabhsingh.dWarden;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,14 +14,32 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
-public class HomePageActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.w3c.dom.Text;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class HomePageActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    TextView navEmailTextView,navNameTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -41,6 +60,12 @@ public class HomePageActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View header = navigationView.getHeaderView(0);
+        navEmailTextView=(TextView)header.findViewById(R.id.navEmailTextView);
+        navNameTextView=(TextView)header.findViewById(R.id.navNameTextView);
+        navEmailTextView.setText(AppDataPreferences.getEmail(HomePageActivity.this));
+        navNameTextView.setText("Name");
     }
 
     @Override
@@ -76,7 +101,7 @@ public class HomePageActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_profile) {
-
+            startActivity(new Intent(HomePageActivity.this,ProfileActivity.class));
         }
         else if (id == R.id.nav_roomBooking) {
             startActivity(new Intent(HomePageActivity.this,RoomBookingActivity.class));
@@ -92,6 +117,7 @@ public class HomePageActivity extends AppCompatActivity
         }
         else if (id == R.id.nav_logout) {
             AppDataPreferences.setToken(HomePageActivity.this,null);
+            AppDataPreferences.setEmail(HomePageActivity.this,null);
             startActivity(new Intent(HomePageActivity.this,LoginActivity.class));
             finish();
         }

@@ -39,17 +39,17 @@ import java.util.Map;
 public class SignUpActivity extends AppCompatActivity {
 
     private static String URL = AppDataPreferences.URL+"student";
-    private EditText rollNo, name, specialization,  percentage;
+    private EditText rollNo, name, percentage;
     private CheckBox checkBoxBloodDonation;
     private Button updateButton;
     private RequestQueue requestQueue;
     private boolean isSpinnerInitial = true;
     private Spinner spinner;
     private ArrayAdapter<CharSequence> staticAdapter;
-    private static String year = null, hostel = null, bloodGroup = null, canDonateBlood = null;
-    private int yearPosition=0, hostelPosition=0, bloodPosition=0;
+    private static String year = null, hostel = null, branch = null, bloodGroup = null, canDonateBlood = null;
+    private int yearPosition=0, branchPosition=0,hostelPosition=0, bloodPosition=0;
     private LinearLayout registrationLayout;
-    private String result,emailId;
+    private String status,emailId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,22 +77,8 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_NEXT) {
-                    specialization.requestFocus();
-                    return true;
-                }
-                return false;
-            }
-        });
-
-        specialization = (EditText) findViewById(R.id.editSpecialization);
-        specialization.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_NEXT) {
-
                     InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                    inputMethodManager.hideSoftInputFromWindow(specialization.getWindowToken(), 0);
-                    return true;
+                    inputMethodManager.hideSoftInputFromWindow(name.getWindowToken(), 0);
                 }
                 return false;
             }
@@ -117,6 +103,33 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 attemptUpdate();
+            }
+        });
+
+        spinner = (Spinner)findViewById(R.id.spinnerBranch);
+        staticAdapter = ArrayAdapter.createFromResource(this, R.array.branch, android.R.layout.simple_spinner_item);
+        staticAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(staticAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                branchPosition = position;
+                if (isSpinnerInitial) {
+                    branch = parent.getItemAtPosition(position).toString();
+                    isSpinnerInitial = false;
+                } else {
+                    if (position == 0) ;
+                    else {
+                        branch = parent.getItemAtPosition(position).toString();
+                        Toast.makeText(getBaseContext(),branch, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
             }
         });
 
@@ -208,7 +221,6 @@ public class SignUpActivity extends AppCompatActivity {
         View focusView = null;
         String userRoll = rollNo.getText().toString();
         String userName = name.getText().toString();
-        String userSpecialization = specialization.getText().toString();
         String userPercentage = percentage.getText().toString();
 
         if (TextUtils.isEmpty(userRoll)) {
@@ -223,16 +235,16 @@ public class SignUpActivity extends AppCompatActivity {
             focusView = name;
         }
 
-        else if(TextUtils.isEmpty(userSpecialization)) {
-            cancel=true;
-            specialization.setError("Please enter your specialization");
-            focusView = specialization;
-        }
-
         else if(TextUtils.isEmpty(userPercentage)) {
             cancel=true;
             percentage.setError("Please enter your percentage");
             focusView = percentage;
+        }
+
+        else if(branchPosition <= 0){
+            cancel=true;
+            focusView=null;
+            Toast.makeText(SignUpActivity.this, "Branch is not selected.", Toast.LENGTH_SHORT).show();
         }
 
         else if(yearPosition <= 0){
@@ -258,11 +270,11 @@ public class SignUpActivity extends AppCompatActivity {
                     focusView.requestFocus();
             }
             else {
-                updateTheStudent(userRoll,userName,userSpecialization,userPercentage);
+                updateTheStudent(userRoll,userName,userPercentage);
             }
     }
 
-    private void updateTheStudent(final String userRoll,final String userName,final String userSpecialization,final String userPercentage) {
+    private void updateTheStudent(final String userRoll,final String userName,final String userPercentage) {
 
         final ProgressDialog progressDialog = new ProgressDialog(SignUpActivity.this,R.style.AppTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
@@ -275,21 +287,20 @@ public class SignUpActivity extends AppCompatActivity {
                 public void onResponse(String response) {
                     try {
                         JSONObject jsonObject = new JSONObject(response);
-                        Toast.makeText(SignUpActivity.this,jsonObject.toString(),Toast.LENGTH_SHORT).show();
-                        result= jsonObject.getString("result");
-//                        if(result.equals("fail")) {
-//                            Toast.makeText(SignUpActivity.this, "Updation of your details failed!!",Toast.LENGTH_SHORT).show();
-//                            progressDialog.setMessage("Updation failed!");
-//                            progressDialog.dismiss();
-//                        }
-//                        else {
-//                            Toast.makeText(SignUpActivity.this, "Congrats,You are now successfully registered with us.", Toast.LENGTH_LONG).show();
-//                            Intent i = new Intent(SignUpActivity.this,LoginActivity.class);
-//                            startActivity(i);
-//                            finish();
-//                            progressDialog.setMessage("Details updated!");
-//                            progressDialog.dismiss();
-//                        }
+                        status= jsonObject.getString("status");
+                        if(status.equals("fail")) {
+                            Toast.makeText(SignUpActivity.this, "Updation of your details failed!!",Toast.LENGTH_SHORT).show();
+                            progressDialog.setMessage("Updation failed!");
+                            progressDialog.dismiss();
+                        }
+                        else {
+                            Toast.makeText(SignUpActivity.this, "Congrats,You are now successfully registered with us.", Toast.LENGTH_LONG).show();
+                            Intent i = new Intent(SignUpActivity.this,LoginActivity.class);
+                            startActivity(i);
+                            finish();
+                            progressDialog.setMessage("Details updated!");
+                            progressDialog.dismiss();
+                        }
                         finish();
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -307,7 +318,7 @@ public class SignUpActivity extends AppCompatActivity {
                     params.put("statename","Uttar Pradesh");
                     params.put("collegename","BIET Jhansi");
                     params.put("hostelname", hostel);
-                    params.put("branchname", userSpecialization);
+                    params.put("branchname", branch);
                     params.put("studentname", userName);
                     params.put("studentrollno", userRoll);
                     params.put("studentemailid", emailId);

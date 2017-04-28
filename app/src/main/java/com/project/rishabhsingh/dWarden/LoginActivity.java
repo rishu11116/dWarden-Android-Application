@@ -152,6 +152,7 @@ public class LoginActivity extends AppCompatActivity{
                     if (status.equals("true")) {
                         token = jsonObject.getString("token");
                         AppDataPreferences.setToken(LoginActivity.this,token);
+                        AppDataPreferences.setEmail(LoginActivity.this,email);
                         Toast.makeText(LoginActivity.this, "Login Successful",Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(LoginActivity.this,HomePageActivity.class));
                         finish();

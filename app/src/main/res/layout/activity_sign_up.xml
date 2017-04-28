@@ -50,20 +50,30 @@
                     android:textColor="#000"/>
             </android.support.design.widget.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <RelativeLayout
                 android:layout_width="324dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal">
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="10dp">
-                <EditText
-                    android:layout_width="304dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/editSpecialization"
-                    android:maxLines="1"
-                    android:inputType="text"
-                    android:hint="Specialization"
-                    android:textColor="#000"/>
-            </android.support.design.widget.TextInputLayout>
+                android:layout_marginTop="4dp"
+                android:paddingTop="10dp"
+                android:textSize="18sp"
+                android:text="Branch   :  "
+                android:id="@+id/textBranch"
+                android:layout_alignParentLeft="true" />
+
+            <Spinner
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:id="@+id/spinnerBranch"
+                android:layout_alignTop="@+id/textBranch"
+                android:layout_toRightOf="@+id/textBranch"
+                android:textColor="#000"/>
+            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="324dp"

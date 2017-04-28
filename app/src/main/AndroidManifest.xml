@@ -49,10 +49,20 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <activity android:name=".RoomBookingActivity"
+        <activity
+            android:name=".RoomBookingActivity"
             android:parentActivityName=".HomePageActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppNavTheme" />
+        <activity
+            android:name=".BloodSearchActivity"
+            android:parentActivityName=".HomePageActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppNavTheme" />
+        <activity
+            android:name=".ProfileActivity"
+            android:parentActivityName=".HomePageActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

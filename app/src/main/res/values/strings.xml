@@ -11,6 +11,16 @@
         <item>O+</item>
         <item>O-</item>
     </string-array>
+    <string-array name="branch">
+        <item>--Select--</item>
+        <item>CE</item>
+        <item>CH</item>
+        <item>CSE</item>
+        <item>ECE</item>
+        <item>EE</item>
+        <item>IT</item>
+        <item>ME</item>
+    </string-array>
     <string-array name="degree_year">
         <item>--Select--</item>
         <item>1st</item>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/profile_layout"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        app:layout_scrollFlags="scroll|enterAlways"
+        android:background="@drawable/profile_cover">
+
+        <ImageView
+            android:id="@+id/user_profile_photo"
+            android:layout_width="100dp"
+            android:layout_height="120dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/my_profile_circular_border_imageview"
+            android:paddingRight="5dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/default_profile_pic" />
+
+
+        <TextView
+            android:id="@+id/user_profile_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/user_profile_photo"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:text="Please wait.\n Your Profile is loading..."
+            android:textColor="#fff"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profile_layout"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/background_scroll"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profile_layout"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="#f2ffff"
+                android:clickable="true"
+                android:elevation="4dp"
+                android:padding="20dp"
+                android:textStyle="bold"
+                android:text="College Id :"
+                android:id="@+id/user_profile_id" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="#f2ffff"
+                android:clickable="true"
+                android:elevation="4dp"
+                android:padding="20dp"
+                android:textStyle="bold"
+                android:text="Branch :"
+                android:id="@+id/user_profile_branch" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"
+                android:background="#f2ffff"
+                android:clickable="true"
+                android:elevation="4dp"
+                android:padding="20dp"
+                android:text="Year :"
+                android:textStyle="bold"
+                android:id="@+id/user_profile_batch" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="#f2ffff"
+                android:clickable="true"
+                android:elevation="4dp"
+                android:padding="20dp"
+                android:textStyle="bold"
+                android:text="Email :"
+                android:id="@+id/user_profile_email" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="#f2ffff"
+                android:clickable="true"
+                android:elevation="4dp"
+                android:padding="20dp"
+                android:textStyle="bold"
+                android:text="Blood Group :"
+                android:id="@+id/user_profile_blood"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="#f2ffff"
+                android:clickable="true"
+                android:elevation="4dp"
+                android:padding="20dp"
+                android:textStyle="bold"
+                android:text="Room Allotted :"
+                android:id="@+id/user_room_allotted"/>
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
