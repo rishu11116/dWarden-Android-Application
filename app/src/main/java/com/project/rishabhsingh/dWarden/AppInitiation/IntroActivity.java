@@ -8,7 +8,7 @@ import android.os.Bundle;
 import com.github.paolorotolo.appintro.AppIntro;
 import com.project.rishabhsingh.dWarden.AppDataPreferences;
 import com.project.rishabhsingh.dWarden.HomePageActivity;
-import com.project.rishabhsingh.dWarden.LoginActivity;
+import com.project.rishabhsingh.dWarden.AccountsManagementSystem.LoginActivity;
 import com.project.rishabhsingh.dWarden.R;
 import com.project.rishabhsingh.dWarden.SampleSlide;
 

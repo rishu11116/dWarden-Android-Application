@@ -25,8 +25,8 @@ public class ProfileActivity extends AppCompatActivity {
 
     private String baseURL = AppDataPreferences.URL+"student?email=";
     RequestQueue requestQueue;
-    private TextView userName,userRoll,userBranch,userYear,userEmail,userBlood,userRoom;
-    private String name,roll,branch,year,blood,room;
+    private TextView userName,userRoll,userBranch,userYear,userEmail,userBlood,userRoom,userPercentage;
+    private String name,roll,branch,year,blood,room,percentage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +39,7 @@ public class ProfileActivity extends AppCompatActivity {
         userEmail=(TextView)findViewById(R.id.user_profile_email);
         userBlood=(TextView)findViewById(R.id.user_profile_blood);
         userRoom=(TextView)findViewById(R.id.user_room_allotted);
+        userPercentage=(TextView)findViewById(R.id.user_percentage);
         load_Profile();
 
     }
@@ -110,6 +111,9 @@ public class ProfileActivity extends AppCompatActivity {
                     if (!jsonObject.getString("studentroomno").equals("")) {
                         room = jsonObject.getString("studentroomno");
                     }
+                    if (!jsonObject.getString("studentpercentage").equals("")) {
+                        percentage = jsonObject.getString("studentpercentage");
+                    }
                     progressDialog.setMessage("Your profile is loaded...");
                     progressDialog.dismiss();
                     populate_profile();
@@ -149,6 +153,7 @@ public class ProfileActivity extends AppCompatActivity {
         userEmail.append("\t\t\t"+AppDataPreferences.getEmail(ProfileActivity.this));
         userBlood.append("\t\t\t"+blood);
         userRoom.append("\t\t\t"+room);
+        userPercentage.append("\t\t\t"+percentage);
     }
 
 }

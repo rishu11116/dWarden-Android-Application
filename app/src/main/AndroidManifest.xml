@@ -33,15 +33,15 @@
             android:name=".AppInitiation.IntroActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".RegistrationActivity"
-            android:parentActivityName=".LoginActivity"
+            android:name=".AccountsManagementSystem.RegistrationActivity"
+            android:parentActivityName=".AccountsManagementSystem.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SignUpActivity"
-            android:parentActivityName=".LoginActivity"
+            android:name=".AccountsManagementSystem.SignUpActivity"
+            android:parentActivityName=".AccountsManagementSystem.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".AccountsManagementSystem.LoginActivity"
             android:label="@string/title_activity_login"
             android:screenOrientation="portrait" />
         <activity

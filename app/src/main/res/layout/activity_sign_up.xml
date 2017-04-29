@@ -159,11 +159,11 @@
                     android:layout_width="304dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/editPercentage"
-                    android:hint="Percentage (Last Session)"
+                    android:hint="Contact Number"
                     android:maxLines="1"
-                    android:maxLength="2"
+                    android:maxLength="10"
                     android:textColor="#000"
-                    android:inputType="number|numberPassword|phone"/>
+                    android:inputType="number"/>
             </android.support.design.widget.TextInputLayout>
 
             <CheckBox

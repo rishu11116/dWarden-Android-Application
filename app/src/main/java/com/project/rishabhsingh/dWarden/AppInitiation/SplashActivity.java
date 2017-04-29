@@ -19,9 +19,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.project.rishabhsingh.dWarden.AppDataPreferences;
 import com.project.rishabhsingh.dWarden.HomePageActivity;
-import com.project.rishabhsingh.dWarden.LoginActivity;
+import com.project.rishabhsingh.dWarden.AccountsManagementSystem.LoginActivity;
 import com.project.rishabhsingh.dWarden.R;
-import com.project.rishabhsingh.dWarden.SignUpActivity;
+import com.project.rishabhsingh.dWarden.AccountsManagementSystem.SignUpActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
