@@ -67,9 +67,42 @@ public class ProfileActivity extends AppCompatActivity {
                     }
                     if (!jsonObject.getString("branchname").equals("")) {
                         branch = jsonObject.getString("branchname");
+                        if(branch.equals("CSE")) {
+                            branch="Computer Science & Engineering";
+                        }
+                        if(branch.equals("ECE")) {
+                            branch="Electronics & Communication Engineering";
+                        }
+                        if(branch.equals("CE")) {
+                            branch="Civil Engineering";
+                        }
+                        if(branch.equals("CH")) {
+                            branch="Chemical Engineering";
+                        }
+                        if(branch.equals("ME")) {
+                            branch="Mechanical Engineering";
+                        }
+                        if(branch.equals("EE")) {
+                            branch="Electrical Engineering";
+                        }
+                        if(branch.equals("IT")) {
+                            branch="Information Technology";
+                        }
                     }
                     if (!jsonObject.getString("studentyear").equals("")) {
                         year = jsonObject.getString("studentyear");
+                        if(year.equals("1")) {
+                            year="1st";
+                        }
+                        if(year.equals("2")) {
+                            year="2nd";
+                        }
+                        if(year.equals("3")) {
+                            year="3rd";
+                        }
+                        if(year.equals("4")) {
+                            year="Final";
+                        }
                     }
                     if (!jsonObject.getString("studentbloodgp").equals("")) {
                         blood = jsonObject.getString("studentbloodgp");

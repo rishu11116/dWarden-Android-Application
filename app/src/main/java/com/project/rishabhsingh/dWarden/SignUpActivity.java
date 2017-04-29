@@ -2,7 +2,9 @@ package com.project.rishabhsingh.dWarden;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -349,11 +351,33 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode ==  KeyEvent.KEYCODE_BACK) {
-            finish();
-            Intent i = new Intent(SignUpActivity.this,LoginActivity.class);
-            startActivity(i);
+            showDialog();
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    private void showDialog() {
+        final AlertDialog alertDialog = new AlertDialog.Builder(SignUpActivity.this).create();
+        alertDialog.setTitle("Warning!!!");
+        alertDialog.setIcon(R.drawable.wrong_warning);
+        alertDialog.setMessage("Don't you want to update your profile details ?");
+        alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                alertDialog.dismiss();
+            }
+        });
+        alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                alertDialog.dismiss();
+                AppDataPreferences.setToken(SignUpActivity.this,null);
+                AppDataPreferences.setEmail(SignUpActivity.this,null);
+                startActivity(new Intent(SignUpActivity.this,LoginActivity.class));
+                finish();
+            }
+        });
+        alertDialog.show();
     }
 
 }

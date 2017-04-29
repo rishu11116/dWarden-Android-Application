@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -33,13 +34,14 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity{
 
-    private static String URL = AppDataPreferences.URL+"login";
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private Button signIn;
     private TextView register;
     private String status;
+    private RequestQueue requestQueue;
     private static String token;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,12 +139,13 @@ public class LoginActivity extends AppCompatActivity{
 
     private void startLogin(final String email,final String password) {
 
-        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,R.style.AppTheme_Dark_Dialog);
+        progressDialog = new ProgressDialog(LoginActivity.this,R.style.AppTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
 
-        final RequestQueue requestQueue = Volley.newRequestQueue(LoginActivity.this);
+        String URL = AppDataPreferences.URL+"login";
+        requestQueue = Volley.newRequestQueue(LoginActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST,URL,new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -153,11 +156,7 @@ public class LoginActivity extends AppCompatActivity{
                         token = jsonObject.getString("token");
                         AppDataPreferences.setToken(LoginActivity.this,token);
                         AppDataPreferences.setEmail(LoginActivity.this,email);
-                        Toast.makeText(LoginActivity.this, "Login Successful",Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(LoginActivity.this,HomePageActivity.class));
-                        finish();
-                        progressDialog.setMessage("Authentication approved!");
-                        progressDialog.dismiss();
+                        showName(email);
                     }
                     else {
                         Toast.makeText(LoginActivity.this, "Invalid login details", Toast.LENGTH_SHORT).show();
@@ -191,6 +190,59 @@ public class LoginActivity extends AppCompatActivity{
                 Map<String,String> params = new HashMap<String, String>();
                 params.put("Content-Type","application/x-www-form-urlencoded");
                 params.put("authorization","token ce3fe9a203703c7ea3da8727ff8fbafec8ddbf44");
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+
+    private void showName(final String email) {
+
+        String URL = AppDataPreferences.URL+"student?email="+email;
+        requestQueue = Volley.newRequestQueue(LoginActivity.this);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    if(response.length()>2) {
+                        response=response.replace('[',' ');
+                        response=response.replace(']',' ');
+                        JSONObject jsonObject = new JSONObject(response);
+                        progressDialog.setMessage("Authentication approved!");
+                        progressDialog.dismiss();
+                        Toast.makeText(LoginActivity.this,"Welcome "+jsonObject.getString("studentname"),Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(LoginActivity.this,HomePageActivity.class));
+                        finish();
+                    }
+                    else {
+                        progressDialog.dismiss();
+                        Intent intent = new Intent(LoginActivity.this,SignUpActivity.class);
+                        intent.putExtra("Email",email);
+                        startActivity(intent);
+                        finish();
+                        Toast.makeText(LoginActivity.this,"Please update your details.",Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("email", AppDataPreferences.getEmail(LoginActivity.this));
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                params.put("authorization", "token ce3fe9a203703c7ea3da8727ff8fbafec8ddbf44");
                 return params;
             }
         };

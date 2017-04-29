@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
@@ -34,6 +35,7 @@ import java.util.Map;
 public class HomePageActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     TextView navEmailTextView,navNameTextView;
+    private RequestQueue requestQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +67,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         navEmailTextView=(TextView)header.findViewById(R.id.navEmailTextView);
         navNameTextView=(TextView)header.findViewById(R.id.navNameTextView);
         navEmailTextView.setText(AppDataPreferences.getEmail(HomePageActivity.this));
-        navNameTextView.setText("Name");
+        loadName();
     }
 
     @Override
@@ -125,5 +127,46 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void loadName() {
+
+        String URL = AppDataPreferences.URL+"student?email="+AppDataPreferences.getEmail(HomePageActivity.this);
+        requestQueue = Volley.newRequestQueue(HomePageActivity.this);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    response=response.replace('[',' ');
+                    response=response.replace(']',' ');
+                    JSONObject jsonObject = new JSONObject(response);
+                    if (!jsonObject.getString("studentname").equals("")) {
+                        navNameTextView.setText(jsonObject.getString("studentname"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("email", AppDataPreferences.getEmail(HomePageActivity.this));
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                params.put("authorization", "token ce3fe9a203703c7ea3da8727ff8fbafec8ddbf44");
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
     }
 }

@@ -40,6 +40,7 @@ public class RoomBookingActivity extends AppCompatActivity {
     private RadioGroup radioGroup1,radioGroup2,radioGroup3,radioGroup4,radioGroup5,radioGroup6,radioGroup7,radioGroup8,radioGroup9,radioGroup10;
     private Button checkAvailabilityButton;
     private String status,duplicate;
+    private Boolean randomallocation=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -458,6 +459,7 @@ public class RoomBookingActivity extends AppCompatActivity {
                                 public void onClick(DialogInterface dialog, int which) {
                                     alertDialog.dismiss();
                                     clearPreferences();
+                                    randomallocation=true;
                                     automatedSearch();
                                 }
                             });
@@ -506,6 +508,7 @@ public class RoomBookingActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("studentrollno", AppDataPreferences.studentRollNo);
+                params.put("randomallocation",randomallocation.toString());
                 params.put("choice1", choice1);
                 params.put("choice2", choice2);
                 params.put("choice3", choice3);
@@ -588,6 +591,17 @@ public class RoomBookingActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("studentrollno", AppDataPreferences.studentRollNo);
+                params.put("randomallocation",randomallocation.toString());
+                params.put("choice1", "null");
+                params.put("choice2", "null");
+                params.put("choice3", "null");
+                params.put("choice4", "null");
+                params.put("choice5", "null");
+                params.put("choice6", "null");
+                params.put("choice7", "null");
+                params.put("choice8", "null");
+                params.put("choice9", "null");
+                params.put("choice10", "null");
                 return params;
             }
             @Override
