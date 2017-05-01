@@ -125,7 +125,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private void showDialogOnExit() {
         final AlertDialog.Builder builder= new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog));
-        builder.setTitle("Do you want to exit?");
+        builder.setTitle("Do you want to exit ?");
 
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override

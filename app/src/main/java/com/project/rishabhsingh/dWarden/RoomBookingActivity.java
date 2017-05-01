@@ -439,7 +439,7 @@ public class RoomBookingActivity extends AppCompatActivity {
                     if(status.equals("null")) {
                         if(duplicate.equals("yes")) {
                             final AlertDialog alertDialog = new AlertDialog.Builder(RoomBookingActivity.this).create();
-                            alertDialog.setTitle("Warning!!!");
+                            alertDialog.setTitle("Warning !!!");
                             alertDialog.setMessage("Sorry!!You have been already allotted a room in your hostel.Now,you cannot book another room for yourself.");
                             alertDialog.setIcon(R.drawable.wrong_warning);
                             alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
@@ -451,7 +451,7 @@ public class RoomBookingActivity extends AppCompatActivity {
                             });
                         } else {
                             final AlertDialog alertDialog = new AlertDialog.Builder(RoomBookingActivity.this).create();
-                            alertDialog.setTitle("Warning!!!");
+                            alertDialog.setTitle("Warning !!!");
                             alertDialog.setIcon(R.drawable.wrong_warning);
                             alertDialog.setMessage("Oops!!There seems to be a problem with your room allotment.None of your preferred rooms is available.Should I search a room available for you or are you gonna try once more to fill your preferences ?");
                             alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Search", new DialogInterface.OnClickListener() {
@@ -482,7 +482,7 @@ public class RoomBookingActivity extends AppCompatActivity {
                     else {
                         clearPreferences();
                         final AlertDialog alertDialog = new AlertDialog.Builder(RoomBookingActivity.this).create();
-                        alertDialog.setTitle("Congratulations!!!");
+                        alertDialog.setTitle("Congratulations !!!");
                         alertDialog.setMessage("Room "+status+" is successfully allotted to you.You can now enjoy your hostel life in this new room.");
                         alertDialog.setIcon(R.drawable.right_tick);
                         alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
@@ -566,7 +566,7 @@ public class RoomBookingActivity extends AppCompatActivity {
                     JSONObject jsonObject= new JSONObject(response);
                     status = jsonObject.getString("status");
                     final AlertDialog alertDialog = new AlertDialog.Builder(RoomBookingActivity.this).create();
-                    alertDialog.setTitle("Congratulations!!!");
+                    alertDialog.setTitle("Congratulations !!!");
                     alertDialog.setMessage("Room "+status+" is successfully allotted to you.You can now enjoy your hostel life in this new room.");
                     alertDialog.setIcon(R.drawable.right_tick);
                     alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {

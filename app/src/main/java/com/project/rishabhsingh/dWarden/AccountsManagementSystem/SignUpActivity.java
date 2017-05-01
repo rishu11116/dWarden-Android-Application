@@ -360,7 +360,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void showDialog() {
         final AlertDialog alertDialog = new AlertDialog.Builder(SignUpActivity.this).create();
-        alertDialog.setTitle("Warning!!!");
+        alertDialog.setTitle("Warning !!!");
         alertDialog.setIcon(R.drawable.wrong_warning);
         alertDialog.setMessage("Don't you want to update your profile details ?");
         alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
