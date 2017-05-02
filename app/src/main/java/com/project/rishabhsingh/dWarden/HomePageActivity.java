@@ -204,7 +204,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
             startActivity(new Intent(HomePageActivity.this,RoomBookingActivity.class));
         }
         else if (id == R.id.nav_bloodNeed) {
-            startActivity(new Intent(HomePageActivity.this,SampleActivity.class));
+
         }
         else if (id == R.id.nav_settings) {
 
@@ -356,15 +356,15 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
 
     private void setPanchavatiNames() {
 
-        textViewChiefWardenName.setText("Steve Jobs");
-        textViewWardenName.setText("Sundar Pichai");
-        textViewChiefSupervisorName.setText("Satya Nadella");
-        textViewSupervisorName.setText("Elon Musk");
-        textViewChiefElectricianName.setText("Bill Gates");
-        textViewElectricianName.setText("Steve Chen");
-        textViewAmbulance1Name.setText("Jeff Bezos");
-        textViewAmbulance2Name.setText("Jeff Weiner");
-        textViewAmbulance3Name.setText("Tim Cook");
+        textViewChiefWardenName.setText("Dr. N.S.Beniwal");
+        textViewWardenName.setText("Dr. Yashpal Singh");
+        textViewChiefSupervisorName.setText("Mr. Akhilesh Yadav");
+        textViewSupervisorName.setText("Mr. O.P.Pandey");
+        textViewChiefElectricianName.setText("Mr. K.S.Yadav");
+        textViewElectricianName.setText("Mr. Sanjeev Sahu");
+        textViewAmbulance1Name.setText("Mr. Rakesh Raghav");
+        textViewAmbulance2Name.setText("Mr. Arvind Rajak");
+        textViewAmbulance3Name.setText("Mr. Vivek Saxena");
     }
 
     private void setJaiBharatNames() {
@@ -434,15 +434,15 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
 
     private void setPanchavatiContacts() {
 
-        contactChiefWarden="";
-        contactWarden="";
-        contactChiefSupervisor="";
-        contactSupervisor="";
-        contactChiefElectrician="";
-        contactElectrician="";
-        contactAmbulance1="";
-        contactAmbulance2="";
-        contactAmbulance3="";
+        contactChiefWarden="9415179843";
+        contactWarden="9415030602";
+        contactChiefSupervisor="9450068368";
+        contactSupervisor="8765165609";
+        contactChiefElectrician="9450081424";
+        contactElectrician="9450069102";
+        contactAmbulance1="9415947723";
+        contactAmbulance2="9415508037";
+        contactAmbulance3="9451550349";
     }
 
     private void setJaiBharatContacts() {

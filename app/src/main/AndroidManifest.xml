@@ -64,7 +64,6 @@
             android:name=".ProfileActivity"
             android:parentActivityName=".HomePageActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".SampleActivity"></activity>
     </application>
 
 </manifest>

@@ -8,7 +8,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -28,28 +27,31 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.project.rishabhsingh.dWarden.AppDataPreferences;
 import com.project.rishabhsingh.dWarden.R;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private static String URL = AppDataPreferences.URL+"student";
+    private String URL;
     private EditText rollNo, name, percentage;
     private CheckBox checkBoxBloodDonation;
     private Button updateButton;
     private RequestQueue requestQueue;
     private boolean isSpinnerInitial = true;
     private Spinner spinner;
+    private Spinner spinnerBranch,spinnerYear;
     private ProgressDialog progressDialog;
+    private ArrayList<String> branchList,yearList;
     private ArrayAdapter<CharSequence> staticAdapter;
     private static String year = null, hostel = null, branch = null, bloodGroup = null, canDonateBlood = null;
     private int yearPosition=0, branchPosition=0,hostelPosition=0, bloodPosition=0;
@@ -111,15 +113,18 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-        spinner = (Spinner)findViewById(R.id.spinnerBranch);
-        staticAdapter = ArrayAdapter.createFromResource(this, R.array.branch, android.R.layout.simple_spinner_item);
-        staticAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(staticAdapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        branchList=new ArrayList<>();
+        branchList.add("--Select--");
+        loadBranches();
 
+        yearList=new ArrayList<>();
+        yearList.add("--Select--");
+        loadYears();
+
+        spinnerBranch = (Spinner)findViewById(R.id.spinnerBranch);
+        spinnerBranch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
                 branchPosition = position;
                 if (isSpinnerInitial) {
                     branch = parent.getItemAtPosition(position).toString();
@@ -132,18 +137,13 @@ public class SignUpActivity extends AppCompatActivity {
                     }
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
 
-        spinner = (Spinner)findViewById(R.id.spinnerYear);
-        staticAdapter = ArrayAdapter.createFromResource(this, R.array.degree_year, android.R.layout.simple_spinner_item);
-        staticAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(staticAdapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
+        spinnerYear = (Spinner)findViewById(R.id.spinnerYear);
+        spinnerYear.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
@@ -155,11 +155,10 @@ public class SignUpActivity extends AppCompatActivity {
                     if (position == 0) ;
                     else {
                         year = parent.getItemAtPosition(position).toString();
-                        Toast.makeText(getBaseContext(),year+" Year", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getBaseContext(),year, Toast.LENGTH_SHORT).show();
                     }
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -287,6 +286,7 @@ public class SignUpActivity extends AppCompatActivity {
         progressDialog.show();
         progressDialog.setCancelable(false);
 
+            URL=AppDataPreferences.URL+"student";
             requestQueue = Volley.newRequestQueue(SignUpActivity.this);
             StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
                 @Override
@@ -384,4 +384,75 @@ public class SignUpActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
+    private void loadBranches() {
+
+        progressDialog = new ProgressDialog(SignUpActivity.this,R.style.AppTheme_Dark_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Fetching data...");
+        progressDialog.show();
+        progressDialog.setCancelable(false);
+
+        URL=AppDataPreferences.URL+"query/branch";
+        requestQueue = Volley.newRequestQueue(SignUpActivity.this);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,URL,new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray branchArray = new JSONArray(response);
+                    for (int i = 0; i < branchArray.length(); i++) {
+                        JSONObject branchObject = branchArray.getJSONObject(i);
+                        branchList.add(branchObject.getString("branch"));
+                    }
+                    spinnerBranch.setAdapter(new ArrayAdapter<String>(SignUpActivity.this, android.R.layout.simple_spinner_dropdown_item,branchList));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        },new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+            }
+        });
+        requestQueue.add(stringRequest);
+    }
+
+    private void loadYears() {
+
+        URL=AppDataPreferences.URL+"query/year";
+        requestQueue = Volley.newRequestQueue(SignUpActivity.this);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,URL,new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray yearArray = new JSONArray(response);
+                    for (int i = 0; i < yearArray.length(); i++) {
+                        JSONObject yearObject = yearArray.getJSONObject(i);
+                        String yearName=yearObject.getString("year");
+                        if(yearName.equals("1")) {
+                            yearName="1st";
+                        }
+                        if(yearName.equals("2")) {
+                            yearName="2nd";
+                        }
+                        if(yearName.equals("3")) {
+                            yearName="3rd";
+                        }
+                        if(yearName.equals("4")) {
+                            yearName="Final";
+                        }
+                        yearList.add(yearName);
+                    }
+                    spinnerYear.setAdapter(new ArrayAdapter<String>(SignUpActivity.this, android.R.layout.simple_spinner_dropdown_item,yearList));
+                    progressDialog.dismiss();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        },new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+            }
+        });
+        requestQueue.add(stringRequest);
+    }
 }
