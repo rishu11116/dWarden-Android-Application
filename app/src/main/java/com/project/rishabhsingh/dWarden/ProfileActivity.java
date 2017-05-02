@@ -24,7 +24,8 @@ import java.util.Map;
 public class ProfileActivity extends AppCompatActivity {
 
     private String baseURL = AppDataPreferences.URL+"student?email=";
-    RequestQueue requestQueue;
+    private RequestQueue requestQueue;
+    private ProgressDialog progressDialog;
     private TextView userName,userRoll,userBranch,userYear,userEmail,userBlood,userRoom,userPercentage;
     private String name,roll,branch,year,blood,room,percentage;
     @Override
@@ -46,10 +47,12 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void load_Profile() {
 
-        final ProgressDialog progressDialog = new ProgressDialog(ProfileActivity.this,R.style.AppTheme_Dark_Dialog);
+        progressDialog = new ProgressDialog(ProfileActivity.this,R.style.AppTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Fetching your details...");
         progressDialog.show();
+        progressDialog.setCancelable(false);
+
         String URL = baseURL+AppDataPreferences.getEmail(ProfileActivity.this);
         requestQueue = Volley.newRequestQueue(ProfileActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.GET,URL, new Response.Listener<String>() {

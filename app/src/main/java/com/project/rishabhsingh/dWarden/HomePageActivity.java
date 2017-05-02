@@ -44,15 +44,17 @@ import java.util.Map;
 
 public class HomePageActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    TextView navEmailTextView,navNameTextView;
+    private TextView navEmailTextView,navNameTextView;
     private RequestQueue requestQueue;
-    private static String hostel;
+    public static String hostel,roll;
     private ProgressDialog progressDialog;
     private TextView textViewChiefWardenName,textViewWardenName,textViewChiefSupervisorName,textViewSupervisorName,
             textViewChiefElectricianName,textViewElectricianName,textViewAmbulance1Name,textViewAmbulance2Name,
             textViewAmbulance3Name;
     private ImageView imageViewChiefWarden,imageViewWarden,imageViewChiefSupervisor,imageViewSupervisor,imageViewChiefElectrician,
             imageViewElectrician,imageViewAmbulance1,imageViewAmbulance2,imageViewAmbulance3;
+    private String contactChiefWarden,contactWarden,contactChiefSupervisor,contactSupervisor,
+            contactChiefElectrician,contactElectrician,contactAmbulance1,contactAmbulance2,contactAmbulance3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,54 +112,55 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         imageViewChiefWarden.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                showDialogAndCall(textViewChiefWardenName.getText().toString(),contactChiefWarden);
             }
         });
         imageViewWarden.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                showDialogAndCall(textViewWardenName.getText().toString(),contactWarden);
             }
         });
         imageViewChiefSupervisor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                showDialogAndCall(textViewChiefSupervisorName.getText().toString(),contactChiefSupervisor);
             }
         });
         imageViewSupervisor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                showDialogAndCall(textViewSupervisorName.getText().toString(),contactSupervisor);
             }
         });
         imageViewChiefElectrician.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                showDialogAndCall(textViewChiefElectricianName.getText().toString(),contactChiefElectrician);
             }
         });
         imageViewElectrician.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                showDialogAndCall(textViewElectricianName.getText().toString(),contactElectrician);
             }
         });
         imageViewAmbulance1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                showDialogAndCall(textViewAmbulance1Name.getText().toString(),contactAmbulance1);
             }
         });
         imageViewAmbulance2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                showDialogAndCall(textViewAmbulance2Name.getText().toString(),contactAmbulance2);
             }
         });
         imageViewAmbulance3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                showDialogAndCall(textViewAmbulance3Name.getText().toString(),contactAmbulance3);
             }
         });
     }
@@ -201,7 +204,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
             startActivity(new Intent(HomePageActivity.this,RoomBookingActivity.class));
         }
         else if (id == R.id.nav_bloodNeed) {
-
+            startActivity(new Intent(HomePageActivity.this,SampleActivity.class));
         }
         else if (id == R.id.nav_settings) {
 
@@ -227,6 +230,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Fetching details...");
         progressDialog.show();
+        progressDialog.setCancelable(false);
 
         String URL = AppDataPreferences.URL+"student?email="+AppDataPreferences.getEmail(HomePageActivity.this);
         requestQueue = Volley.newRequestQueue(HomePageActivity.this);
@@ -240,25 +244,34 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
                     if (!jsonObject.getString("studentname").equals("")) {
                         navNameTextView.setText(jsonObject.getString("studentname"));
                     }
+                    if (!jsonObject.getString("studentrollno").equals("")) {
+                        roll=jsonObject.getString("studentrollno");
+                    }
                     if (!jsonObject.getString("hostelname").equals("")) {
                         hostel=jsonObject.getString("hostelname");
                         if(hostel.equals("Vrindawan Bhawan Bhawan")) {
                             setVrindawanNames();
+                            setVrindawanContacts();
                         }
                         else if(hostel.equals("Saket Bhawan")) {
                             setSaketNames();
+                            setSaketContacts();
                         }
                         else if(hostel.equals("Panchavati Bhawan")) {
                             setPanchavatiNames();
+                            setPanchavatiContacts();
                         }
                         else if(hostel.equals("Jai Bharat Bhawan")) {
                             setJaiBharatNames();
+                            setJaiBharatContacts();
                         }
                         else if(hostel.equals("Yashodhara Bhawan")) {
                             setYashodharaNames();
+                            setYashodharaContacts();
                         }
                         else {
                             setKalpanaNames();
+                            setKalpanaContacts();
                         }
                         progressDialog.dismiss();
                     }
@@ -289,38 +302,12 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         requestQueue.add(stringRequest);
     }
 
-    private void callPhone() {
-        final AlertDialog alertDialog = new AlertDialog.Builder(HomePageActivity.this).create();
-        alertDialog.setTitle("Permission !!!");
-        alertDialog.setIcon(R.drawable.phone_permission);
-        alertDialog.setMessage("Do you want to call your hostel Chief Warden ?");
-        alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent callIntent = new Intent(Intent.ACTION_CALL);
-                callIntent.setData(Uri.parse("tel:8979965258"));
-                if (ActivityCompat.checkSelfPermission(HomePageActivity.this,
-                        Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED)  {
-                    return;
-                }
-                startActivity(callIntent);
-            }
-        });
-        alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                alertDialog.dismiss();
-            }
-        });
-        alertDialog.show();
-    }
-
     private void setYashodharaNames() {
 
         textViewChiefWardenName.setText("Dr. Amitabh Srivastava");
         textViewWardenName.setText("Dr. Shahnaz Ayub");
-        textViewChiefSupervisorName.setText("Suresh Chaudhary");
-        textViewSupervisorName.setText("Annu Singh");
+        textViewChiefSupervisorName.setText("Mr. Suresh Chaudhary");
+        textViewSupervisorName.setText("Mrs. Annu Singh");
         textViewChiefElectricianName.setText("Mr. K.S.Yadav");
         textViewElectricianName.setText("Mr. Sanjeev Sahu");
         textViewAmbulance1Name.setText("Mr. Rakesh Raghav");
@@ -391,5 +378,110 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         textViewAmbulance1Name.setText("Jeff Bezos");
         textViewAmbulance2Name.setText("Jeff Weiner");
         textViewAmbulance3Name.setText("Tim Cook");
+    }
+
+    private void setYashodharaContacts() {
+
+        contactChiefWarden="9452591206";
+        contactWarden="9415587596";
+        contactChiefSupervisor="9451395319";
+        contactSupervisor="8382888329";
+        contactChiefElectrician="9450081424";
+        contactElectrician="9450069102";
+        contactAmbulance1="9415947723";
+        contactAmbulance2="9415508037";
+        contactAmbulance3="9451550349";
+    }
+
+    private void setKalpanaContacts() {
+
+        contactChiefWarden="9450504743";
+        contactWarden="7607869687";
+        contactChiefSupervisor="9453338592";
+        contactSupervisor="8382888329";
+        contactChiefElectrician="9450081424";
+        contactElectrician="9450069102";
+        contactAmbulance1="9415947723";
+        contactAmbulance2="9415508037";
+        contactAmbulance3="9451550349";
+    }
+
+    private void setVrindawanContacts() {
+
+        contactChiefWarden="9415060081";
+        contactWarden="9415910616";
+        contactChiefSupervisor="9415590667";
+        contactSupervisor="9415503807";
+        contactChiefElectrician="9450081424";
+        contactElectrician="9450069102";
+        contactAmbulance1="9415947723";
+        contactAmbulance2="9415508037";
+        contactAmbulance3="9451550349";
+    }
+
+    private void setSaketContacts() {
+
+        contactChiefWarden="";
+        contactWarden="";
+        contactChiefSupervisor="";
+        contactSupervisor="";
+        contactChiefElectrician="";
+        contactElectrician="";
+        contactAmbulance1="";
+        contactAmbulance2="";
+        contactAmbulance3="";
+    }
+
+    private void setPanchavatiContacts() {
+
+        contactChiefWarden="";
+        contactWarden="";
+        contactChiefSupervisor="";
+        contactSupervisor="";
+        contactChiefElectrician="";
+        contactElectrician="";
+        contactAmbulance1="";
+        contactAmbulance2="";
+        contactAmbulance3="";
+    }
+
+    private void setJaiBharatContacts() {
+
+        contactChiefWarden="";
+        contactWarden="";
+        contactChiefSupervisor="";
+        contactSupervisor="";
+        contactChiefElectrician="";
+        contactElectrician="";
+        contactAmbulance1="";
+        contactAmbulance2="";
+        contactAmbulance3="";
+    }
+
+    private void showDialogAndCall(final String name, final String phone) {
+
+        final AlertDialog alertDialog = new AlertDialog.Builder(HomePageActivity.this).create();
+        alertDialog.setTitle("Permission !!!");
+        alertDialog.setIcon(R.drawable.phone_permission);
+        alertDialog.setMessage("Do you want to call " + name + " ?");
+        alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:"+ phone));
+                if (ActivityCompat.checkSelfPermission(HomePageActivity.this,
+                        Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    return;
+                }
+                startActivity(callIntent);
+            }
+        });
+        alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                alertDialog.dismiss();
+            }
+        });
+        alertDialog.show();
     }
 }

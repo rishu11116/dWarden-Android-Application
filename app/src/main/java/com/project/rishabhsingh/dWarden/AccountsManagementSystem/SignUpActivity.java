@@ -49,6 +49,7 @@ public class SignUpActivity extends AppCompatActivity {
     private RequestQueue requestQueue;
     private boolean isSpinnerInitial = true;
     private Spinner spinner;
+    private ProgressDialog progressDialog;
     private ArrayAdapter<CharSequence> staticAdapter;
     private static String year = null, hostel = null, branch = null, bloodGroup = null, canDonateBlood = null;
     private int yearPosition=0, branchPosition=0,hostelPosition=0, bloodPosition=0;
@@ -280,10 +281,11 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void updateTheStudent(final String userRoll,final String userName,final String userPercentage) {
 
-        final ProgressDialog progressDialog = new ProgressDialog(SignUpActivity.this,R.style.AppTheme_Dark_Dialog);
+        progressDialog = new ProgressDialog(SignUpActivity.this,R.style.AppTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Updating details...");
         progressDialog.show();
+        progressDialog.setCancelable(false);
 
             requestQueue = Volley.newRequestQueue(SignUpActivity.this);
             StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {

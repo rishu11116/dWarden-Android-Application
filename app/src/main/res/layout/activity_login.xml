@@ -8,7 +8,7 @@
     android:paddingLeft="8dp"
     android:paddingRight="8dp"
     android:paddingTop="45dp"
-    tools:context=".LoginActivity">
+    tools:context=".AccountsManagementSystem.LoginActivity">
 
     <ImageView
         android:layout_width="match_parent"
@@ -16,24 +16,12 @@
         android:src="@drawable/logo"
         android:background="?attr/selectableItemBackgroundBorderless"/>
 
-    <ProgressBar
-        android:id="@+id/login_progress"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="156dp"
-        android:layout_height="156dp"
-        android:layout_marginTop="258dp"
-        android:layout_marginLeft="98dp"
-        android:visibility="gone"
-        />
-
     <ScrollView
         android:id="@+id/login_screen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="false"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/login_progress"
-        android:layout_toEndOf="@+id/login_progress">
+        android:layout_alignParentTop="true">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

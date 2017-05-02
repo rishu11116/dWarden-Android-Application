@@ -3,17 +3,12 @@ package com.project.rishabhsingh.dWarden;
 import android.content.Context;
 import android.preference.PreferenceManager;
 
-/**
- * Created by Rishabh Singh on 22-03-2017.
- */
-
 public class AppDataPreferences {
 
     private static final String INTRO_NEEDED = "introNeeded";
     private static final String PREF_TOKEN_KEY= "token";
     private static final String PREF_EMAIL_KEY= "email";
     public static final String URL = "http://hmsonline.herokuapp.com/api/";
-    public static final String studentRollNo = "1404310064";
 
     public static boolean isIntroNeeded(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context)

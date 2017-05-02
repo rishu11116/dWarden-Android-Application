@@ -34,12 +34,13 @@ import java.util.Map;
 
 public class RegistrationActivity extends AppCompatActivity {
 
-    RequestQueue requestQueue;
+    private RequestQueue requestQueue;
     private static String URL = AppDataPreferences.URL+"register";
     private EditText userName,email,password,confirmPassword;
     private boolean updateRequired=false;
-    Button nextButton;
-    String created;
+    private Button nextButton;
+    private ProgressDialog progressDialog;
+    private String created;
     public static String token;
 
     @Override
@@ -156,10 +157,11 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private void registerTheStudent(final String username,final String useremail,final String userpassword) {
 
-        final ProgressDialog progressDialog = new ProgressDialog(RegistrationActivity.this,R.style.AppTheme_Dark_Dialog);
+        progressDialog = new ProgressDialog(RegistrationActivity.this,R.style.AppTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Creating account...");
         progressDialog.show();
+        progressDialog.setCancelable(false);
 
         requestQueue = Volley.newRequestQueue(RegistrationActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST,URL,new Response.Listener<String>() {

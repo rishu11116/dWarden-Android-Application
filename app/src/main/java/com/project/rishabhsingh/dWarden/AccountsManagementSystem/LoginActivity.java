@@ -146,6 +146,7 @@ public class LoginActivity extends AppCompatActivity{
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
+        progressDialog.setCancelable(false);
 
         String URL = AppDataPreferences.URL+"login";
         requestQueue = Volley.newRequestQueue(LoginActivity.this);

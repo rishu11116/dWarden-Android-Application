@@ -1,5 +1,6 @@
 package com.project.rishabhsingh.dWarden;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -33,14 +34,13 @@ import java.util.Map;
 public class RoomBookingActivity extends AppCompatActivity {
 
     private static String URLTrying = AppDataPreferences.URL + "hostelallot";
-    private static String URLAutomated = AppDataPreferences.URL + "";
     private EditText choice1Room, choice2Room, choice3Room, choice4Room, choice5Room, choice6Room, choice7Room, choice8Room, choice9Room, choice10Room;
     private String choice1Floor, choice2Floor, choice3Floor, choice4Floor, choice5Floor, choice6Floor, choice7Floor, choice8Floor, choice9Floor, choice10Floor;
     private String choice1, choice2, choice3, choice4, choice5, choice6, choice7, choice8, choice9, choice10;
     private RadioGroup radioGroup1,radioGroup2,radioGroup3,radioGroup4,radioGroup5,radioGroup6,radioGroup7,radioGroup8,radioGroup9,radioGroup10;
     private Button checkAvailabilityButton;
     private String status,duplicate;
-    private Boolean randomallocation=false;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,16 +80,16 @@ public class RoomBookingActivity extends AppCompatActivity {
                         || (TextUtils.isEmpty(choice10Room.getText().toString()))) {
                     Toast.makeText(RoomBookingActivity.this, "One or more preferences are left incomplete !!", Toast.LENGTH_SHORT).show();
                 } else {
-                    choice1 = choice1Floor + choice1Room.getText().toString();
-                    choice2 = choice2Floor + choice2Room.getText().toString();
-                    choice3 = choice3Floor + choice3Room.getText().toString();
-                    choice4 = choice4Floor + choice4Room.getText().toString();
-                    choice5 = choice5Floor + choice5Room.getText().toString();
-                    choice6 = choice6Floor + choice6Room.getText().toString();
-                    choice7 = choice7Floor + choice7Room.getText().toString();
-                    choice8 = choice8Floor + choice8Room.getText().toString();
-                    choice9 = choice9Floor + choice9Room.getText().toString();
-                    choice10 = choice10Floor + choice10Room.getText().toString();
+                    choice1 = HomePageActivity.hostel+" "+ choice1Floor + choice1Room.getText().toString();
+                    choice2 = HomePageActivity.hostel+" "+ choice2Floor + choice2Room.getText().toString();
+                    choice3 = HomePageActivity.hostel+" "+ choice3Floor + choice3Room.getText().toString();
+                    choice4 = HomePageActivity.hostel+" "+ choice4Floor + choice4Room.getText().toString();
+                    choice5 = HomePageActivity.hostel+" "+ choice5Floor + choice5Room.getText().toString();
+                    choice6 = HomePageActivity.hostel+" "+ choice6Floor + choice6Room.getText().toString();
+                    choice7 = HomePageActivity.hostel+" "+ choice7Floor + choice7Room.getText().toString();
+                    choice8 = HomePageActivity.hostel+" "+ choice8Floor + choice8Room.getText().toString();
+                    choice9 = HomePageActivity.hostel+" "+ choice9Floor + choice9Room.getText().toString();
+                    choice10 = HomePageActivity.hostel+" "+ choice10Floor + choice10Room.getText().toString();
                     findAvailableRooms(choice1, choice2, choice3, choice4, choice5, choice6, choice7, choice8, choice9, choice10);
                 }
 
@@ -428,6 +428,13 @@ public class RoomBookingActivity extends AppCompatActivity {
     private void findAvailableRooms(final String choice1, final String choice2, final String choice3, final String choice4,
                                     final String choice5, final String choice6, final String choice7, final String choice8,
                                     final String choice9, final String choice10) {
+
+        progressDialog = new ProgressDialog(RoomBookingActivity.this,R.style.AppTheme_Dark_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Checking room availability...");
+        progressDialog.show();
+        progressDialog.setCancelable(false);
+
         final RequestQueue requestQueue = Volley.newRequestQueue(RoomBookingActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URLTrying, new Response.Listener<String>() {
             @Override
@@ -438,6 +445,7 @@ public class RoomBookingActivity extends AppCompatActivity {
                     duplicate=jsonObject.getString("duplicate");
                     if(status.equals("null")) {
                         if(duplicate.equals("yes")) {
+                            progressDialog.dismiss();
                             final AlertDialog alertDialog = new AlertDialog.Builder(RoomBookingActivity.this).create();
                             alertDialog.setTitle("Warning !!!");
                             alertDialog.setMessage("Sorry!!You have been already allotted a room in your hostel.Now,you cannot book another room for yourself.");
@@ -447,30 +455,23 @@ public class RoomBookingActivity extends AppCompatActivity {
                                 public void onClick(DialogInterface dialog, int which) {
                                     alertDialog.dismiss();
                                     startActivity(new Intent(RoomBookingActivity.this, HomePageActivity.class));
+                                    finish();
                                 }
                             });
                         } else {
+                            progressDialog.dismiss();
                             final AlertDialog alertDialog = new AlertDialog.Builder(RoomBookingActivity.this).create();
                             alertDialog.setTitle("Warning !!!");
                             alertDialog.setIcon(R.drawable.wrong_warning);
-                            alertDialog.setMessage("Oops!!There seems to be a problem with your room allotment.None of your preferred rooms is available.Should I search a room available for you or are you gonna try once more to fill your preferences ?");
-                            alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Search", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    alertDialog.dismiss();
-                                    clearPreferences();
-                                    randomallocation=true;
-                                    automatedSearch();
-                                }
-                            });
-                            alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Let me try", new DialogInterface.OnClickListener() {
+                            alertDialog.setMessage("Oops!!There seems to be a problem with your room allotment.None of your preferred rooms is available.Do you want to fill your preferences again ?");
+                            alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Yes,let me try", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     alertDialog.dismiss();
                                     clearPreferences();
                                 }
                             });
-                            alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL, "Cancel", new DialogInterface.OnClickListener() {
+                            alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     alertDialog.dismiss();
@@ -480,6 +481,7 @@ public class RoomBookingActivity extends AppCompatActivity {
                         }
                     }
                     else {
+                        progressDialog.dismiss();
                         clearPreferences();
                         final AlertDialog alertDialog = new AlertDialog.Builder(RoomBookingActivity.this).create();
                         alertDialog.setTitle("Congratulations !!!");
@@ -507,8 +509,8 @@ public class RoomBookingActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("studentrollno", AppDataPreferences.studentRollNo);
-                params.put("randomallocation",randomallocation.toString());
+                params.put("studentrollno",HomePageActivity.roll);
+                params.put("randomallocation","false");
                 params.put("choice1", choice1);
                 params.put("choice2", choice2);
                 params.put("choice3", choice3);
@@ -557,61 +559,4 @@ public class RoomBookingActivity extends AppCompatActivity {
         radioGroup10.clearCheck();
     }
 
-    private void automatedSearch() {
-        final RequestQueue requestQueue = Volley.newRequestQueue(RoomBookingActivity.this);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URLAutomated, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject= new JSONObject(response);
-                    status = jsonObject.getString("status");
-                    final AlertDialog alertDialog = new AlertDialog.Builder(RoomBookingActivity.this).create();
-                    alertDialog.setTitle("Congratulations !!!");
-                    alertDialog.setMessage("Room "+status+" is successfully allotted to you.You can now enjoy your hostel life in this new room.");
-                    alertDialog.setIcon(R.drawable.right_tick);
-                    alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            alertDialog.dismiss();
-                            startActivity(new Intent(RoomBookingActivity.this,HomePageActivity.class));
-                        }
-                    });
-                    alertDialog.show();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("studentrollno", AppDataPreferences.studentRollNo);
-                params.put("randomallocation",randomallocation.toString());
-                params.put("choice1", "null");
-                params.put("choice2", "null");
-                params.put("choice3", "null");
-                params.put("choice4", "null");
-                params.put("choice5", "null");
-                params.put("choice6", "null");
-                params.put("choice7", "null");
-                params.put("choice8", "null");
-                params.put("choice9", "null");
-                params.put("choice10", "null");
-                return params;
-            }
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("Content-Type", "application/x-www-form-urlencoded");
-                params.put("authorization", "token ce3fe9a203703c7ea3da8727ff8fbafec8ddbf44");
-                return params;
-            }
-        };
-        requestQueue.add(stringRequest);
-    }
 }
