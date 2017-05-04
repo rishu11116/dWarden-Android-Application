@@ -18,6 +18,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -115,7 +116,7 @@ public class ProfileActivity extends AppCompatActivity {
                         room = jsonObject.getString("studentroomno");
                     }
                     if (!jsonObject.getString("studentpercentage").equals("")) {
-                        percentage = jsonObject.getString("studentpercentage");
+                        percentage = BigDecimal.valueOf(jsonObject.getDouble("studentpercentage")).toString();
                     }
                     progressDialog.setMessage("Your profile is loaded...");
                     progressDialog.dismiss();

@@ -33,7 +33,7 @@ import java.util.Map;
 
 public class RoomBookingActivity extends AppCompatActivity {
 
-    private static String URLTrying = AppDataPreferences.URL + "hostelallot";
+    private static String URL = AppDataPreferences.URL + "hostelallot";
     private EditText choice1Room, choice2Room, choice3Room, choice4Room, choice5Room, choice6Room, choice7Room, choice8Room, choice9Room, choice10Room;
     private String choice1Floor, choice2Floor, choice3Floor, choice4Floor, choice5Floor, choice6Floor, choice7Floor, choice8Floor, choice9Floor, choice10Floor;
     private String choice1, choice2, choice3, choice4, choice5, choice6, choice7, choice8, choice9, choice10;
@@ -436,7 +436,7 @@ public class RoomBookingActivity extends AppCompatActivity {
         progressDialog.setCancelable(false);
 
         final RequestQueue requestQueue = Volley.newRequestQueue(RoomBookingActivity.this);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URLTrying, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {

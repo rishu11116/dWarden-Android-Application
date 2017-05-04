@@ -12,6 +12,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -35,6 +36,7 @@ import com.android.volley.toolbox.Volley;
 import com.project.rishabhsingh.dWarden.AccountsManagementSystem.LoginActivity;
 import com.project.rishabhsingh.dWarden.AccountsManagementSystem.SignUpActivity;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
@@ -46,6 +48,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
 
     private TextView navEmailTextView,navNameTextView;
     private RequestQueue requestQueue;
+    private String URL;
     public static String hostel,roll;
     private ProgressDialog progressDialog;
     private TextView textViewChiefWardenName,textViewWardenName,textViewChiefSupervisorName,textViewSupervisorName,
@@ -98,6 +101,17 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         textViewAmbulance1Name = (TextView)findViewById(R.id.textAmbulance1Name);
         textViewAmbulance2Name = (TextView)findViewById(R.id.textAmbulance2Name);
         textViewAmbulance3Name = (TextView)findViewById(R.id.textAmbulance3Name);
+
+        textViewChiefElectricianName.setText("Mr. K.S.Yadav");
+        textViewElectricianName.setText("Mr. Sanjeev Sahu");
+        textViewAmbulance1Name.setText("Mr. Rakesh Raghav");
+        textViewAmbulance2Name.setText("Mr. Arvind Rajak");
+        textViewAmbulance3Name.setText("Mr. Vivek Saxena");
+        contactChiefElectrician="9450081424";
+        contactElectrician="9450069102";
+        contactAmbulance1="9415947723";
+        contactAmbulance2="9415508037";
+        contactAmbulance3="9451550349";
 
         imageViewChiefWarden = (ImageView)findViewById(R.id.imageChiefWarden);
         imageViewWarden = (ImageView)findViewById(R.id.imageWarden);
@@ -204,7 +218,6 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
             startActivity(new Intent(HomePageActivity.this,RoomBookingActivity.class));
         }
         else if (id == R.id.nav_bloodNeed) {
-
         }
         else if (id == R.id.nav_settings) {
 
@@ -232,7 +245,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         progressDialog.show();
         progressDialog.setCancelable(false);
 
-        String URL = AppDataPreferences.URL+"student?email="+AppDataPreferences.getEmail(HomePageActivity.this);
+        URL = AppDataPreferences.URL+"student?email="+AppDataPreferences.getEmail(HomePageActivity.this);
         requestQueue = Volley.newRequestQueue(HomePageActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.GET,URL, new Response.Listener<String>() {
             @Override
@@ -308,11 +321,6 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         textViewWardenName.setText("Dr. Shahnaz Ayub");
         textViewChiefSupervisorName.setText("Mr. Suresh Chaudhary");
         textViewSupervisorName.setText("Mrs. Annu Singh");
-        textViewChiefElectricianName.setText("Mr. K.S.Yadav");
-        textViewElectricianName.setText("Mr. Sanjeev Sahu");
-        textViewAmbulance1Name.setText("Mr. Rakesh Raghav");
-        textViewAmbulance2Name.setText("Mr. Arvind Rajak");
-        textViewAmbulance3Name.setText("Mr. Vivek Saxena");
     }
 
     private void setKalpanaNames() {
@@ -321,11 +329,6 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         textViewWardenName.setText("Dr. Ekta Pandey");
         textViewChiefSupervisorName.setText("Dr. S.Mandal");
         textViewSupervisorName.setText("Mrs. Annu Singh");
-        textViewChiefElectricianName.setText("Mr. K.S.Yadav");
-        textViewElectricianName.setText("Mr. Sanjeev Sahu");
-        textViewAmbulance1Name.setText("Mr. Rakesh Raghav");
-        textViewAmbulance2Name.setText("Mr. Arvind Rajak");
-        textViewAmbulance3Name.setText("Mr. Vivek Saxena");
     }
 
     private void setVrindawanNames() {
@@ -334,24 +337,14 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         textViewWardenName.setText("Dr. P.K.Srivastava");
         textViewChiefSupervisorName.setText("Mr. Pushpendra Singh");
         textViewSupervisorName.setText("Mr. S.N. Chaturvedi");
-        textViewChiefElectricianName.setText("Mr. K.S.Yadav");
-        textViewElectricianName.setText("Mr. Sanjeev Sahu");
-        textViewAmbulance1Name.setText("Mr. Rakesh Raghav");
-        textViewAmbulance2Name.setText("Mr. Arvind Rajak");
-        textViewAmbulance3Name.setText("Mr. Vivek Saxena");
     }
 
     private void setSaketNames() {
 
-        textViewChiefWardenName.setText("Steve Jobs");
-        textViewWardenName.setText("Sundar Pichai");
-        textViewChiefSupervisorName.setText("Satya Nadella");
-        textViewSupervisorName.setText("Elon Musk");
-        textViewChiefElectricianName.setText("Bill Gates");
-        textViewElectricianName.setText("Steve Chen");
-        textViewAmbulance1Name.setText("Jeff Bezos");
-        textViewAmbulance2Name.setText("Jeff Weiner");
-        textViewAmbulance3Name.setText("Tim Cook");
+        textViewChiefWardenName.setText("Dr. A.K.Nigam");
+        textViewWardenName.setText("Dr. S.K.Sriwas");
+        textViewChiefSupervisorName.setText("Mr. Sanjeev Singh");
+        textViewSupervisorName.setText("Mr. Balveer");
     }
 
     private void setPanchavatiNames() {
@@ -360,11 +353,6 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         textViewWardenName.setText("Dr. Yashpal Singh");
         textViewChiefSupervisorName.setText("Mr. Akhilesh Yadav");
         textViewSupervisorName.setText("Mr. O.P.Pandey");
-        textViewChiefElectricianName.setText("Mr. K.S.Yadav");
-        textViewElectricianName.setText("Mr. Sanjeev Sahu");
-        textViewAmbulance1Name.setText("Mr. Rakesh Raghav");
-        textViewAmbulance2Name.setText("Mr. Arvind Rajak");
-        textViewAmbulance3Name.setText("Mr. Vivek Saxena");
     }
 
     private void setJaiBharatNames() {
@@ -373,11 +361,6 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         textViewWardenName.setText("Sundar Pichai");
         textViewChiefSupervisorName.setText("Satya Nadella");
         textViewSupervisorName.setText("Elon Musk");
-        textViewChiefElectricianName.setText("Bill Gates");
-        textViewElectricianName.setText("Steve Chen");
-        textViewAmbulance1Name.setText("Jeff Bezos");
-        textViewAmbulance2Name.setText("Jeff Weiner");
-        textViewAmbulance3Name.setText("Tim Cook");
     }
 
     private void setYashodharaContacts() {
@@ -386,11 +369,6 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         contactWarden="9415587596";
         contactChiefSupervisor="9451395319";
         contactSupervisor="8382888329";
-        contactChiefElectrician="9450081424";
-        contactElectrician="9450069102";
-        contactAmbulance1="9415947723";
-        contactAmbulance2="9415508037";
-        contactAmbulance3="9451550349";
     }
 
     private void setKalpanaContacts() {
@@ -399,11 +377,6 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         contactWarden="7607869687";
         contactChiefSupervisor="9453338592";
         contactSupervisor="8382888329";
-        contactChiefElectrician="9450081424";
-        contactElectrician="9450069102";
-        contactAmbulance1="9415947723";
-        contactAmbulance2="9415508037";
-        contactAmbulance3="9451550349";
     }
 
     private void setVrindawanContacts() {
@@ -412,24 +385,14 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         contactWarden="9415910616";
         contactChiefSupervisor="9415590667";
         contactSupervisor="9415503807";
-        contactChiefElectrician="9450081424";
-        contactElectrician="9450069102";
-        contactAmbulance1="9415947723";
-        contactAmbulance2="9415508037";
-        contactAmbulance3="9451550349";
     }
 
     private void setSaketContacts() {
 
-        contactChiefWarden="";
-        contactWarden="";
-        contactChiefSupervisor="";
-        contactSupervisor="";
-        contactChiefElectrician="";
-        contactElectrician="";
-        contactAmbulance1="";
-        contactAmbulance2="";
-        contactAmbulance3="";
+        contactChiefWarden="9935016061";
+        contactWarden="9956835338";
+        contactChiefSupervisor="9415947666";
+        contactSupervisor="9415793101";
     }
 
     private void setPanchavatiContacts() {
@@ -438,11 +401,6 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         contactWarden="9415030602";
         contactChiefSupervisor="9450068368";
         contactSupervisor="8765165609";
-        contactChiefElectrician="9450081424";
-        contactElectrician="9450069102";
-        contactAmbulance1="9415947723";
-        contactAmbulance2="9415508037";
-        contactAmbulance3="9451550349";
     }
 
     private void setJaiBharatContacts() {

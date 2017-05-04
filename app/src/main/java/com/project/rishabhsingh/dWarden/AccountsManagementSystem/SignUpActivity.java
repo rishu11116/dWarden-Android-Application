@@ -239,9 +239,9 @@ public class SignUpActivity extends AppCompatActivity {
             focusView = name;
         }
 
-        else if(TextUtils.isEmpty(userPercentage)) {
+        else if(userPercentage.length()!=10) {
             cancel=true;
-            percentage.setError("Please enter your percentage");
+            percentage.setError("Please enter your valid contact number");
             focusView = percentage;
         }
 
