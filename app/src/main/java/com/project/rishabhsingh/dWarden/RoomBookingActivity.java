@@ -30,7 +30,6 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-
 public class RoomBookingActivity extends AppCompatActivity {
 
     private static String URL = AppDataPreferences.URL + "hostelallot";
@@ -39,7 +38,7 @@ public class RoomBookingActivity extends AppCompatActivity {
     private String choice1, choice2, choice3, choice4, choice5, choice6, choice7, choice8, choice9, choice10;
     private RadioGroup radioGroup1,radioGroup2,radioGroup3,radioGroup4,radioGroup5,radioGroup6,radioGroup7,radioGroup8,radioGroup9,radioGroup10;
     private Button checkAvailabilityButton;
-    private String status,duplicate;
+    private String status;
     private ProgressDialog progressDialog;
 
     @Override
@@ -80,16 +79,16 @@ public class RoomBookingActivity extends AppCompatActivity {
                         || (TextUtils.isEmpty(choice10Room.getText().toString()))) {
                     Toast.makeText(RoomBookingActivity.this, "One or more preferences are left incomplete !!", Toast.LENGTH_SHORT).show();
                 } else {
-                    choice1 = HomePageActivity.hostel+" "+ choice1Floor + choice1Room.getText().toString();
-                    choice2 = HomePageActivity.hostel+" "+ choice2Floor + choice2Room.getText().toString();
-                    choice3 = HomePageActivity.hostel+" "+ choice3Floor + choice3Room.getText().toString();
-                    choice4 = HomePageActivity.hostel+" "+ choice4Floor + choice4Room.getText().toString();
-                    choice5 = HomePageActivity.hostel+" "+ choice5Floor + choice5Room.getText().toString();
-                    choice6 = HomePageActivity.hostel+" "+ choice6Floor + choice6Room.getText().toString();
-                    choice7 = HomePageActivity.hostel+" "+ choice7Floor + choice7Room.getText().toString();
-                    choice8 = HomePageActivity.hostel+" "+ choice8Floor + choice8Room.getText().toString();
-                    choice9 = HomePageActivity.hostel+" "+ choice9Floor + choice9Room.getText().toString();
-                    choice10 = HomePageActivity.hostel+" "+ choice10Floor + choice10Room.getText().toString();
+                    choice1 = choice1Floor + choice1Room.getText().toString();
+                    choice2 = choice2Floor + choice2Room.getText().toString();
+                    choice3 = choice3Floor + choice3Room.getText().toString();
+                    choice4 = choice4Floor + choice4Room.getText().toString();
+                    choice5 = choice5Floor + choice5Room.getText().toString();
+                    choice6 = choice6Floor + choice6Room.getText().toString();
+                    choice7 = choice7Floor + choice7Room.getText().toString();
+                    choice8 = choice8Floor + choice8Room.getText().toString();
+                    choice9 = choice9Floor + choice9Room.getText().toString();
+                    choice10 = choice10Floor + choice10Room.getText().toString();
                     findAvailableRooms(choice1, choice2, choice3, choice4, choice5, choice6, choice7, choice8, choice9, choice10);
                 }
 
@@ -442,23 +441,25 @@ public class RoomBookingActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     status=jsonObject.getString("status");
-                    duplicate=jsonObject.getString("duplicate");
-                    if(status.equals("null")) {
-                        if(duplicate.equals("yes")) {
-                            progressDialog.dismiss();
-                            final AlertDialog alertDialog = new AlertDialog.Builder(RoomBookingActivity.this).create();
-                            alertDialog.setTitle("Warning !!!");
-                            alertDialog.setMessage("Sorry!!You have been already allotted a room in your hostel.Now,you cannot book another room for yourself.");
-                            alertDialog.setIcon(R.drawable.wrong_warning);
-                            alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    alertDialog.dismiss();
-                                    startActivity(new Intent(RoomBookingActivity.this, HomePageActivity.class));
-                                    finish();
-                                }
-                            });
-                        } else {
+
+                    if(status.equals("roomexist")) {
+                        progressDialog.dismiss();
+                        final AlertDialog alertDialog = new AlertDialog.Builder(RoomBookingActivity.this).create();
+                        alertDialog.setTitle("Warning !!!");
+                        alertDialog.setMessage("Sorry!!You have been already allotted a room in your hostel.Now,you cannot book another room for yourself.");
+                        alertDialog.setIcon(R.drawable.wrong_warning);
+                        alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                alertDialog.dismiss();
+                                startActivity(new Intent(RoomBookingActivity.this, HomePageActivity.class));
+                                finish();
+                            }
+                        });
+                        alertDialog.show();
+                    }
+
+                    else if(status.equals("choicesnotavailable")) {
                             progressDialog.dismiss();
                             final AlertDialog alertDialog = new AlertDialog.Builder(RoomBookingActivity.this).create();
                             alertDialog.setTitle("Warning !!!");
@@ -479,8 +480,8 @@ public class RoomBookingActivity extends AppCompatActivity {
                             });
                             alertDialog.show();
                         }
-                    }
-                    else {
+
+                        else {
                         progressDialog.dismiss();
                         clearPreferences();
                         final AlertDialog alertDialog = new AlertDialog.Builder(RoomBookingActivity.this).create();

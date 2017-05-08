@@ -357,10 +357,10 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
 
     private void setJaiBharatNames() {
 
-        textViewChiefWardenName.setText("Steve Jobs");
-        textViewWardenName.setText("Sundar Pichai");
-        textViewChiefSupervisorName.setText("Satya Nadella");
-        textViewSupervisorName.setText("Elon Musk");
+        textViewChiefWardenName.setText("Dr. S.K.Gupta");
+        textViewWardenName.setText("Dr. Vimal Kishore");
+        textViewChiefSupervisorName.setText("Mr. Hareram");
+        textViewSupervisorName.setText("Mr. O.P.Pandey");
     }
 
     private void setYashodharaContacts() {
@@ -405,15 +405,10 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
 
     private void setJaiBharatContacts() {
 
-        contactChiefWarden="";
-        contactWarden="";
-        contactChiefSupervisor="";
-        contactSupervisor="";
-        contactChiefElectrician="";
-        contactElectrician="";
-        contactAmbulance1="";
-        contactAmbulance2="";
-        contactAmbulance3="";
+        contactChiefWarden="9415057834";
+        contactWarden="9559959377";
+        contactChiefSupervisor="9412638832";
+        contactSupervisor="8765165609";
     }
 
     private void showDialogAndCall(final String name, final String phone) {
