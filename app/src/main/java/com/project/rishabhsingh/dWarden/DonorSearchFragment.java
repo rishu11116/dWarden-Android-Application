@@ -15,10 +15,6 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-/**
- * Created by Rishabh Singh on 19-04-2017.
- */
-
 public class DonorSearchFragment extends Fragment {
 
     private Spinner donorSearchSpinner;
@@ -86,6 +82,6 @@ public class DonorSearchFragment extends Fragment {
     }
 
     private void searchDonors(String bloodGroup) {
-
+        Toast.makeText(context,"You selected "+bloodGroup,Toast.LENGTH_SHORT).show();
     }
 }

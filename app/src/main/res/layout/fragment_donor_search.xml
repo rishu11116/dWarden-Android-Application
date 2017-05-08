@@ -27,9 +27,9 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:id="@+id/buttonDonorSearch"
-        android:layout_alignBaseline="@+id/spinnerDonorSearch"
+        app:srcCompat="@android:drawable/ic_menu_search"
+        android:layout_alignTop="@+id/textDonorSearch"
         android:layout_toRightOf="@+id/spinnerDonorSearch"
-        app:srcCompat="@android:drawable/ic_menu_search" />
+        android:layout_toEndOf="@+id/spinnerDonorSearch" />
 </RelativeLayout>

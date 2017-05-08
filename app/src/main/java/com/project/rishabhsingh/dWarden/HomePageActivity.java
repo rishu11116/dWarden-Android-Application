@@ -43,6 +43,7 @@ import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.BlockingDeque;
 
 public class HomePageActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -66,15 +67,6 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -218,6 +210,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
             startActivity(new Intent(HomePageActivity.this,RoomBookingActivity.class));
         }
         else if (id == R.id.nav_bloodNeed) {
+            startActivity(new Intent(HomePageActivity.this,BloodSearchActivity.class));
         }
         else if (id == R.id.nav_settings) {
 
