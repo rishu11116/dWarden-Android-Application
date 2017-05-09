@@ -182,8 +182,11 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_logout) {
+            AppDataPreferences.setToken(HomePageActivity.this,null);
+            AppDataPreferences.setEmail(HomePageActivity.this,null);
+            startActivity(new Intent(HomePageActivity.this,LoginActivity.class));
+            finish();
         }
 
         return super.onOptionsItemSelected(item);

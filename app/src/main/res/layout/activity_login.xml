@@ -8,12 +8,13 @@
     android:paddingLeft="8dp"
     android:paddingRight="8dp"
     android:paddingTop="45dp"
+    android:background="@drawable/background_light"
     tools:context=".AccountsManagementSystem.LoginActivity">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="160dp"
-        android:src="@drawable/logo"
+        android:src="@drawable/base_logo"
         android:background="?attr/selectableItemBackgroundBorderless"/>
 
     <ScrollView
@@ -48,6 +49,8 @@
                         android:layout_gravity="center"
                         android:layout_height="wrap_content"
                         android:hint="@string/prompt_email"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
                         android:inputType="textEmailAddress"
                         android:maxLines="1"
                         android:textColor="#000"
@@ -69,6 +72,8 @@
                         android:hint="@string/prompt_password"
                         android:layout_gravity="center"
                         android:imeActionId="@+id/login"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
                         android:imeActionLabel="@string/action_sign_in_short"
                         android:imeOptions="actionDone"
                         android:inputType="textPassword"
@@ -83,14 +88,15 @@
                     android:id="@+id/sign_in_button"
                     style="?android:textAppearanceMedium"
                     android:layout_width="200dp"
-                    android:textSize="20sp"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:layout_gravity="center"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="26dp"
                     android:text="@string/action_sign_in"
-                    android:background="#68f24c"
-                    android:textColor="#f21212" />
+                    android:background="#f50626"
+                    android:textColor="#fff" />
 
             </LinearLayout>
             <TextView

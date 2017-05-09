@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_extra_light"
     tools:context="com.project.rishabhsingh.dWarden.RoomBookingActivity">
     <ScrollView
         android:layout_width="match_parent"
@@ -33,11 +34,15 @@
                     android:id="@+id/radioButtonChoiceGround1"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textColor="#000"
+                    android:textStyle="bold"
                     android:onClick="onRadioGroup1Clicked"
                     android:text="Ground Floor" />
                 <RadioButton
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:textColor="#000"
+                    android:textStyle="bold"
                     android:id="@+id/radioButtonChoiceFirst1"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
@@ -46,6 +51,8 @@
                 <RadioButton
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:textColor="#000"
+                    android:textStyle="bold"
                     android:id="@+id/radioButtonChoiceSecond1"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
@@ -55,6 +62,8 @@
             <EditText
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:textColor="#000"
+                android:textStyle="bold"
                 android:id="@+id/editTextChoice1"
                 android:layout_height="wrap_content"
                 android:maxLength="3"
@@ -77,6 +86,8 @@
                 <RadioButton
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:textColor="#000"
+                    android:textStyle="bold"
                     android:id="@+id/radioButtonChoiceGround2"
                     android:layout_height="wrap_content"
                     android:onClick="onRadioGroup2Clicked"
@@ -89,6 +100,8 @@
                     android:layout_height="wrap_content"
                     android:onClick="onRadioGroup2Clicked"
                     android:textSize="12sp"
+                    android:textColor="#000"
+                    android:textStyle="bold"
                     android:text="First Floor" />
                 <RadioButton
                     android:layout_width="0dp"
@@ -97,11 +110,15 @@
                     android:onClick="onRadioGroup2Clicked"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textColor="#000"
+                    android:textStyle="bold"
                     android:text="Second Floor" />
             </RadioGroup>
             <EditText
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:textColor="#000"
+                android:textStyle="bold"
                 android:id="@+id/editTextChoice2"
                 android:layout_height="wrap_content"
                 android:maxLength="3"
@@ -124,6 +141,8 @@
                 <RadioButton
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:textColor="#000"
+                    android:textStyle="bold"
                     android:onClick="onRadioGroup3Clicked"
                     android:id="@+id/radioButtonChoiceGround3"
                     android:layout_height="wrap_content"
@@ -135,11 +154,15 @@
                     android:id="@+id/radioButtonChoiceFirst3"
                     android:layout_height="wrap_content"
                     android:onClick="onRadioGroup3Clicked"
+                    android:textColor="#000"
+                    android:textStyle="bold"
                     android:textSize="12sp"
                     android:text="First Floor" />
                 <RadioButton
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:textColor="#000"
+                    android:textStyle="bold"
                     android:id="@+id/radioButtonChoiceSecond3"
                     android:layout_height="wrap_content"
                     android:onClick="onRadioGroup3Clicked"
@@ -149,6 +172,8 @@
             <EditText
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:textColor="#000"
+                android:textStyle="bold"
                 android:id="@+id/editTextChoice3"
                 android:layout_height="wrap_content"
                 android:maxLength="3"
@@ -175,6 +200,8 @@
                     android:layout_height="wrap_content"
                     android:onClick="onRadioGroup4Clicked"
                     android:textSize="12sp"
+                    android:textColor="#000"
+                    android:textStyle="bold"
                     android:text="Ground Floor" />
                 <RadioButton
                     android:layout_width="0dp"
@@ -183,6 +210,8 @@
                     android:layout_height="wrap_content"
                     android:onClick="onRadioGroup4Clicked"
                     android:textSize="12sp"
+                    android:textColor="#000"
+                    android:textStyle="bold"
                     android:text="First Floor" />
                 <RadioButton
                     android:layout_width="0dp"
@@ -191,11 +220,15 @@
                     android:layout_height="wrap_content"
                     android:onClick="onRadioGroup4Clicked"
                     android:textSize="12sp"
+                    android:textColor="#000"
+                    android:textStyle="bold"
                     android:text="Second Floor" />
             </RadioGroup>
             <EditText
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:textColor="#000"
+                android:textStyle="bold"
                 android:id="@+id/editTextChoice4"
                 android:layout_height="wrap_content"
                 android:maxLength="3"
@@ -221,6 +254,8 @@
                     android:id="@+id/radioButtonChoiceGround5"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textColor="#000"
+                    android:textStyle="bold"
                     android:onClick="onRadioGroup5Clicked"
                     android:text="Ground Floor" />
                 <RadioButton
@@ -229,11 +264,15 @@
                     android:id="@+id/radioButtonChoiceFirst5"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    android:textColor="#000"
+                    android:textStyle="bold"
                     android:onClick="onRadioGroup5Clicked"
                     android:text="First Floor" />
                 <RadioButton
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:textColor="#000"
+                    android:textStyle="bold"
                     android:id="@+id/radioButtonChoiceSecond5"
                     android:layout_height="wrap_content"
                     android:onClick="onRadioGroup5Clicked"
@@ -242,6 +281,8 @@
             </RadioGroup>
             <EditText
                 android:layout_width="0dp"
+                android:textColor="#000"
+                android:textStyle="bold"
                 android:layout_weight="1"
                 android:id="@+id/editTextChoice5"
                 android:layout_height="wrap_content"
@@ -268,6 +309,8 @@
                     android:id="@+id/radioButtonChoiceGround6"
                     android:layout_height="wrap_content"
                     android:onClick="onRadioGroup6Clicked"
+                    android:textColor="#000"
+                    android:textStyle="bold"
                     android:textSize="12sp"
                     android:text="Ground Floor" />
                 <RadioButton
@@ -276,12 +319,16 @@
                     android:id="@+id/radioButtonChoiceFirst6"
                     android:layout_height="wrap_content"
                     android:onClick="onRadioGroup6Clicked"
+                    android:textColor="#000"
+                    android:textStyle="bold"
                     android:textSize="12sp"
                     android:text="First Floor" />
                 <RadioButton
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:id="@+id/radioButtonChoiceSecond6"
+                    android:textColor="#000"
+                    android:textStyle="bold"
                     android:layout_height="wrap_content"
                     android:onClick="onRadioGroup6Clicked"
                     android:textSize="12sp"
@@ -289,6 +336,8 @@
             </RadioGroup>
             <EditText
                 android:layout_width="0dp"
+                android:textColor="#000"
+                android:textStyle="bold"
                 android:layout_weight="1"
                 android:id="@+id/editTextChoice6"
                 android:layout_height="wrap_content"
@@ -312,6 +361,8 @@
                 <RadioButton
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:textColor="#000"
+                    android:textStyle="bold"
                     android:id="@+id/radioButtonChoiceGround7"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
@@ -320,6 +371,8 @@
                 <RadioButton
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:textColor="#000"
+                    android:textStyle="bold"
                     android:id="@+id/radioButtonChoiceFirst7"
                     android:layout_height="wrap_content"
                     android:onClick="onRadioGroup7Clicked"
@@ -328,6 +381,8 @@
                 <RadioButton
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:textColor="#000"
+                    android:textStyle="bold"
                     android:id="@+id/radioButtonChoiceSecond7"
                     android:layout_height="wrap_content"
                     android:onClick="onRadioGroup7Clicked"
@@ -337,6 +392,8 @@
             <EditText
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:textColor="#000"
+                android:textStyle="bold"
                 android:id="@+id/editTextChoice7"
                 android:layout_height="wrap_content"
                 android:maxLength="3"
@@ -362,12 +419,16 @@
                     android:id="@+id/radioButtonChoiceGround8"
                     android:layout_height="wrap_content"
                     android:onClick="onRadioGroup8Clicked"
+                    android:textColor="#000"
+                    android:textStyle="bold"
                     android:textSize="12sp"
                     android:text="Ground Floor" />
                 <RadioButton
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:id="@+id/radioButtonChoiceFirst8"
+                    android:textColor="#000"
+                    android:textStyle="bold"
                     android:layout_height="wrap_content"
                     android:onClick="onRadioGroup8Clicked"
                     android:textSize="12sp"
@@ -375,6 +436,8 @@
                 <RadioButton
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:textColor="#000"
+                    android:textStyle="bold"
                     android:id="@+id/radioButtonChoiceSecond8"
                     android:layout_height="wrap_content"
                     android:onClick="onRadioGroup8Clicked"
@@ -386,6 +449,8 @@
                 android:layout_weight="1"
                 android:id="@+id/editTextChoice8"
                 android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:textStyle="bold"
                 android:maxLength="3"
                 android:inputType="number"/>
         </LinearLayout>
@@ -408,6 +473,8 @@
                     android:layout_weight="1"
                     android:id="@+id/radioButtonChoiceGround9"
                     android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:textStyle="bold"
                     android:onClick="onRadioGroup9Clicked"
                     android:textSize="12sp"
                     android:text="Ground Floor" />
@@ -416,6 +483,8 @@
                     android:layout_weight="1"
                     android:id="@+id/radioButtonChoiceFirst9"
                     android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:textStyle="bold"
                     android:onClick="onRadioGroup9Clicked"
                     android:textSize="12sp"
                     android:text="First Floor" />
@@ -424,6 +493,8 @@
                     android:layout_weight="1"
                     android:id="@+id/radioButtonChoiceSecond9"
                     android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:textStyle="bold"
                     android:onClick="onRadioGroup9Clicked"
                     android:textSize="12sp"
                     android:text="Second Floor" />
@@ -432,6 +503,8 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:id="@+id/editTextChoice9"
+                android:textColor="#000"
+                android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:maxLength="3"
                 android:inputType="number"/>
@@ -454,6 +527,8 @@
                 <RadioButton
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:textColor="#000"
+                    android:textStyle="bold"
                     android:id="@+id/radioButtonChoiceGround10"
                     android:layout_height="wrap_content"
                     android:onClick="onRadioGroup10Clicked"
@@ -462,6 +537,8 @@
                 <RadioButton
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:textColor="#000"
+                    android:textStyle="bold"
                     android:id="@+id/radioButtonChoiceFirst10"
                     android:layout_height="wrap_content"
                     android:onClick="onRadioGroup10Clicked"
@@ -470,6 +547,8 @@
                 <RadioButton
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:textColor="#000"
+                    android:textStyle="bold"
                     android:id="@+id/radioButtonChoiceSecond10"
                     android:layout_height="wrap_content"
                     android:onClick="onRadioGroup10Clicked"
@@ -479,6 +558,8 @@
             <EditText
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:textColor="#000"
+                android:textStyle="bold"
                 android:id="@+id/editTextChoice10"
                 android:layout_height="wrap_content"
                 android:maxLength="3"

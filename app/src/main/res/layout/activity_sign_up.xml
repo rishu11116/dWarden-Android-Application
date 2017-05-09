@@ -6,7 +6,8 @@
     android:paddingBottom="8dp"
     android:paddingLeft="4dp"
     android:paddingRight="4dp"
-    android:paddingTop="8dp">
+    android:paddingTop="8dp"
+    android:background="@drawable/background_light">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -29,6 +30,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/editRollNo"
                     android:hint="Roll Number"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
                     android:maxLines="1"
                     android:maxLength="15"
                     android:textColor="#000"
@@ -44,6 +47,8 @@
                     android:layout_width="304dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/editName"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
                     android:maxLines="1"
                     android:inputType="textPersonName"
                     android:hint="Name"
@@ -160,6 +165,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/editPercentage"
                     android:hint="Contact Number"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
                     android:maxLines="1"
                     android:maxLength="10"
                     android:textColor="#000"
@@ -182,10 +189,10 @@
                 android:layout_marginTop="26dp"
                 android:layout_marginBottom="10dp"
                 android:text="Update"
-                android:textSize="20sp"
-                android:textStyle="bold|italic"
+                android:textSize="25sp"
+                android:textStyle="bold"
                 android:textAllCaps="false"
-                android:background="#128678"
+                android:background="#f50626"
                 android:textColor="#fff"
                 android:id="@+id/buttonUpdate" />
         </LinearLayout>

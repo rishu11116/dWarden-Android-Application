@@ -26,6 +26,7 @@ public class IntroActivity extends AppIntro {
         addSlide(SampleSlide.newInstance(R.layout.slide2));
         addSlide(SampleSlide.newInstance(R.layout.slide3));
         addSlide(SampleSlide.newInstance(R.layout.slide4));
+        addSlide(SampleSlide.newInstance(R.layout.slide5));
         showSkipButton(false);
         setSlideOverAnimation();
     }

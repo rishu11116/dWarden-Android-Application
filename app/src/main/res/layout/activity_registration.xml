@@ -8,7 +8,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".RegistrationActivity" >
+    android:background="@drawable/background_light"
+    tools:context=".AccountsManagementSystem.RegistrationActivity" >
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="324dp"
@@ -21,6 +22,8 @@
             android:id="@+id/editUserName"
             android:hint="UserName"
             android:maxLines="1"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:maxLength="10"
             android:textColor="#000"
             android:inputType="text"/>
@@ -36,6 +39,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/editEmail"
             android:hint="Email"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:maxLines="1"
             android:textColor="#000"
             android:inputType="textEmailAddress"/>
@@ -51,6 +56,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/editPassword"
             android:hint="Password"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:maxLines="1"
             android:maxLength="15"
             android:textColor="#000"
@@ -67,6 +74,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/editConfirmPassword"
             android:hint="Confirm Password"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:maxLines="1"
             android:maxLength="15"
             android:textColor="#000"
@@ -80,10 +89,9 @@
         android:layout_marginTop="20dp"
         android:id="@+id/next_button"
         android:textSize="25sp"
-        android:text="NEXT"
+        android:text="Next"
         android:textStyle="bold"
-        android:background="#126002"
-        android:textColor="#ffffff"
-        android:textAllCaps="true"/>
+        android:background="#f50626"
+        android:textColor="#ffffff" />
 
 </LinearLayout>
