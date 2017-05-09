@@ -10,10 +10,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/noDonorsTextView"
-        android:text="No donors available..."
-        android:textSize="20dp"
+        android:textSize="25sp"
+        android:textAlignment="center"
+        android:textColor="#000"
         android:layout_marginTop="150dp"
-        android:visibility="gone"
         android:layout_centerHorizontal="true"/>
 
     <android.support.v7.widget.RecyclerView

@@ -38,12 +38,12 @@ import java.util.Map;
 public class DonorListFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private TextView textNoDonors;
-    private String URL = AppDataPreferences.URL + "bloodsearch";
-    private DonorViewAdapter adapter;
-    private List<DonorData> donorList;
-    private RequestQueue requestQueue;
-    Context context;
+    private static TextView textNoDonors;
+    private static String URL = AppDataPreferences.URL + "bloodsearch";
+    public static DonorViewAdapter adapter;
+    public static List<DonorData> donorList;
+    private static RequestQueue requestQueue;
+    private static Context context;
 
     public DonorListFragment() {
 
@@ -63,14 +63,13 @@ public class DonorListFragment extends Fragment {
         recyclerView = (RecyclerView) v.findViewById(R.id.donorListRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         donorList = new ArrayList<>();
-        loadDonors();
+        textNoDonors.setText("Please select a blood group to search donors...");
         adapter = new DonorViewAdapter(getActivity(), donorList);
         recyclerView.setAdapter(adapter);
-
         return v;
     }
 
-    private void loadDonors() {
+    public static void loadDonors(final String bloodGroup) {
 
         AsyncTask<Integer, Void, Void> task = new AsyncTask<Integer, Void, Void>() {
 
@@ -82,6 +81,7 @@ public class DonorListFragment extends Fragment {
                     public void onResponse(String response) {
                         try {
                             if (response.length() != 2) {
+                                textNoDonors.setVisibility(View.GONE);
                                 JSONArray donorsArray = new JSONArray(response);
                                 for (int i = 0; i < donorsArray.length(); i++) {
                                     JSONObject donorObject = donorsArray.getJSONObject(i);
@@ -107,7 +107,7 @@ public class DonorListFragment extends Fragment {
                                     donorList.add(donorData);
                                 }
                             } else {
-                                textNoDonors.setVisibility(View.VISIBLE);
+                                textNoDonors.setText("No donors available...");
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -122,7 +122,7 @@ public class DonorListFragment extends Fragment {
                     @Override
                     protected Map<String, String> getParams() {
                         Map<String, String> params = new HashMap<String, String>();
-                        params.put("studentbloodgp", "B-");
+                        params.put("studentbloodgp", bloodGroup);
                         return params;
                     }
 

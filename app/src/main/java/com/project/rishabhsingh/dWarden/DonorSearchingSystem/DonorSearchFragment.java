@@ -1,6 +1,7 @@
-package com.project.rishabhsingh.dWarden;
+package com.project.rishabhsingh.dWarden.DonorSearchingSystem;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
@@ -15,12 +16,14 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.project.rishabhsingh.dWarden.R;
+
 public class DonorSearchFragment extends Fragment {
 
     private Spinner donorSearchSpinner;
     private ArrayAdapter<CharSequence> staticAdapter;
     private boolean isSpinnerInitial = true;
-    private static String bloodGroup=null;
+    public static String bloodGroup=null;
     private int bloodPosition=0;
     private ImageButton donorSearchButton;
     private Context context;
@@ -74,14 +77,12 @@ public class DonorSearchFragment extends Fragment {
                     Toast.makeText(context,"Please select a blood group to search donors.",Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    searchDonors(bloodGroup);
+                    DonorListFragment.donorList.clear();
+                    DonorListFragment.adapter.notifyDataSetChanged();
+                    DonorListFragment.loadDonors(bloodGroup);
                 }
             }
         });
         return v;
-    }
-
-    private void searchDonors(String bloodGroup) {
-        Toast.makeText(context,"You selected "+bloodGroup,Toast.LENGTH_SHORT).show();
     }
 }
