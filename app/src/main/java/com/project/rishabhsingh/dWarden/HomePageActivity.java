@@ -6,13 +6,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -24,7 +20,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -34,16 +29,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.project.rishabhsingh.dWarden.AccountsManagementSystem.LoginActivity;
-import com.project.rishabhsingh.dWarden.AccountsManagementSystem.SignUpActivity;
+import com.project.rishabhsingh.dWarden.DonorSearchingSystem.BloodSearchActivity;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.BlockingDeque;
 
 public class HomePageActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -211,12 +203,6 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         }
         else if (id == R.id.nav_bloodNeed) {
             startActivity(new Intent(HomePageActivity.this,BloodSearchActivity.class));
-        }
-        else if (id == R.id.nav_settings) {
-
-        }
-        else if (id == R.id.nav_developers) {
-
         }
         else if (id == R.id.nav_logout) {
             AppDataPreferences.setToken(HomePageActivity.this,null);

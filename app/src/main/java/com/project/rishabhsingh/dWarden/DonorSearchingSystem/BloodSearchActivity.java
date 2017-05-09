@@ -1,9 +1,12 @@
-package com.project.rishabhsingh.dWarden;
+package com.project.rishabhsingh.dWarden.DonorSearchingSystem;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.project.rishabhsingh.dWarden.DonorSearchFragment;
+import com.project.rishabhsingh.dWarden.R;
 
 public class BloodSearchActivity extends AppCompatActivity {
 

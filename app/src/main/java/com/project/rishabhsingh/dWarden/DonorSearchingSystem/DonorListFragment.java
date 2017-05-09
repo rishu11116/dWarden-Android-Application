@@ -1,4 +1,4 @@
-package com.project.rishabhsingh.dWarden;
+package com.project.rishabhsingh.dWarden.DonorSearchingSystem;
 
 import android.annotation.SuppressLint;
 import android.app.Fragment;
@@ -22,6 +22,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.project.rishabhsingh.dWarden.AccountsManagementSystem.SignUpActivity;
+import com.project.rishabhsingh.dWarden.AppDataPreferences;
+import com.project.rishabhsingh.dWarden.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

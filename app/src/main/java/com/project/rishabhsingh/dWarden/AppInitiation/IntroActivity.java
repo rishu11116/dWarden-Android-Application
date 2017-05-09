@@ -1,9 +1,13 @@
 package com.project.rishabhsingh.dWarden.AppInitiation;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.view.ContextThemeWrapper;
+import android.view.KeyEvent;
 
 import com.github.paolorotolo.appintro.AppIntro;
 import com.project.rishabhsingh.dWarden.AppDataPreferences;
@@ -48,5 +52,34 @@ public class IntroActivity extends AppIntro {
     @Override
     public void onSlideChanged(@Nullable Fragment oldFragment, @Nullable Fragment newFragment) {
         super.onSlideChanged(oldFragment, newFragment);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode ==  KeyEvent.KEYCODE_BACK) {
+            showDialog();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    private void showDialog() {
+        final AlertDialog.Builder builder= new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog));
+        builder.setTitle("Do you want to exit ?");
+
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                finish();
+            }
+        });
+
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
     }
 }

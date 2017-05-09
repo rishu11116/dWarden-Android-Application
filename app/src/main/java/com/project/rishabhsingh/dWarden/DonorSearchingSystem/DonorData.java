@@ -1,4 +1,4 @@
-package com.project.rishabhsingh.dWarden;
+package com.project.rishabhsingh.dWarden.DonorSearchingSystem;
 
 public class DonorData {
 

@@ -9,14 +9,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:paddingTop="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="10dp"
         android:textSize="20sp"
         android:text="Blood Group   :  "
         android:id="@+id/textDonorSearch"
         android:layout_alignParentLeft="true" />
 
     <Spinner
-        android:layout_width="150dp"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:id="@+id/spinnerDonorSearch"
@@ -28,6 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/buttonDonorSearch"
+        android:layout_marginLeft="2dp"
         app:srcCompat="@android:drawable/ic_menu_search"
         android:layout_alignTop="@+id/textDonorSearch"
         android:layout_toRightOf="@+id/spinnerDonorSearch"

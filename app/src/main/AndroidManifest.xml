@@ -56,7 +56,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppNavTheme" />
         <activity
-            android:name=".BloodSearchActivity"
+            android:name=".DonorSearchingSystem.BloodSearchActivity"
             android:parentActivityName=".HomePageActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppNavTheme" />

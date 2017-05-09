@@ -9,7 +9,7 @@
     android:focusableInTouchMode="true"
     android:padding="2dp"
     android:alpha="0.8"
-    tools:context=".BloodSearchActivity">
+    tools:context=".DonorSearchingSystem.BloodSearchActivity">
 
     <FrameLayout
         android:id="@+id/fragment_donorSearch"
