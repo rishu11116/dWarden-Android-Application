@@ -2,19 +2,17 @@ package com.project.rishabhsingh.dWarden.AppInitiation;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ContextThemeWrapper;
 import android.view.KeyEvent;
 
 import com.github.paolorotolo.appintro.AppIntro;
-import com.project.rishabhsingh.dWarden.AppDataPreferences;
-import com.project.rishabhsingh.dWarden.HomePageActivity;
 import com.project.rishabhsingh.dWarden.AccountsManagementSystem.LoginActivity;
+import com.project.rishabhsingh.dWarden.AppDataPreferences;
 import com.project.rishabhsingh.dWarden.R;
-import com.project.rishabhsingh.dWarden.SampleSlide;
 
 public class IntroActivity extends AppIntro {
 

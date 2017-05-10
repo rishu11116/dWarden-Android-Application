@@ -1,11 +1,9 @@
 package com.project.rishabhsingh.dWarden;
 
 import android.app.ProgressDialog;
-import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -27,8 +25,8 @@ public class ProfileActivity extends AppCompatActivity {
     private String baseURL = AppDataPreferences.URL+"student?email=";
     private RequestQueue requestQueue;
     private ProgressDialog progressDialog;
-    private TextView userName,userRoll,userBranch,userYear,userEmail,userBlood,userRoom,userPercentage;
-    private String name,roll,branch,year,blood,room,percentage;
+    private TextView userName,userRoll,userBranch,userYear,userEmail,userBlood,userPercentage;
+    private String name,roll,branch,year,blood,percentage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +38,6 @@ public class ProfileActivity extends AppCompatActivity {
         userYear=(TextView)findViewById(R.id.user_profile_batch);
         userEmail=(TextView)findViewById(R.id.user_profile_email);
         userBlood=(TextView)findViewById(R.id.user_profile_blood);
-        userRoom=(TextView)findViewById(R.id.user_room_allotted);
         userPercentage=(TextView)findViewById(R.id.user_percentage);
         load_Profile();
 
@@ -112,9 +109,6 @@ public class ProfileActivity extends AppCompatActivity {
                     if (!jsonObject.getString("studentbloodgp").equals("")) {
                         blood = jsonObject.getString("studentbloodgp");
                     }
-                    if (!jsonObject.getString("studentroomno").equals("")) {
-                        room = jsonObject.getString("studentroomno");
-                    }
                     if (!jsonObject.getString("studentpercentage").equals("")) {
                         percentage = BigDecimal.valueOf(jsonObject.getDouble("studentpercentage")).toString();
                     }
@@ -156,7 +150,6 @@ public class ProfileActivity extends AppCompatActivity {
         userYear.append("\t\t\t"+year);
         userEmail.append("\t\t\t"+AppDataPreferences.getEmail(ProfileActivity.this));
         userBlood.append("\t\t\t"+blood);
-        userRoom.append("\t\t\t"+room);
         userPercentage.append("\t\t\t"+percentage);
     }
 

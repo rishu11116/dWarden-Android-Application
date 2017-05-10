@@ -1,4 +1,4 @@
-package com.project.rishabhsingh.dWarden;
+package com.project.rishabhsingh.dWarden.AppInitiation;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,10 +6,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-/**
- * Created by Rishabh Singh on 22-03-2017.
- */
 
 public class SampleSlide extends Fragment {
 

@@ -2,16 +2,15 @@ package com.project.rishabhsingh.dWarden.DonorSearchingSystem;
 
 import android.annotation.SuppressLint;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -21,7 +20,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.project.rishabhsingh.dWarden.AccountsManagementSystem.SignUpActivity;
 import com.project.rishabhsingh.dWarden.AppDataPreferences;
 import com.project.rishabhsingh.dWarden.R;
 
@@ -40,6 +38,7 @@ public class DonorListFragment extends Fragment {
     private RecyclerView recyclerView;
     private static TextView textNoDonors;
     private static String URL = AppDataPreferences.URL + "bloodsearch";
+    private static ProgressDialog progressDialog;
     public static DonorViewAdapter adapter;
     public static List<DonorData> donorList;
     private static RequestQueue requestQueue;
@@ -51,7 +50,7 @@ public class DonorListFragment extends Fragment {
 
     @SuppressLint("ValidFragment")
     public DonorListFragment(Context context) {
-        this.context = context;
+        DonorListFragment.context = context;
     }
 
     @Override
@@ -71,10 +70,17 @@ public class DonorListFragment extends Fragment {
 
     public static void loadDonors(final String bloodGroup) {
 
+        progressDialog = new ProgressDialog(context,R.style.AppTheme_Dark_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Fetching donors...");
+        progressDialog.show();
+        progressDialog.setCancelable(false);
+
         AsyncTask<Integer, Void, Void> task = new AsyncTask<Integer, Void, Void>() {
 
             @Override
             protected Void doInBackground(Integer... params) {
+
                 requestQueue = Volley.newRequestQueue(context);
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
                     @Override
@@ -108,7 +114,9 @@ public class DonorListFragment extends Fragment {
                                 }
                             } else {
                                 textNoDonors.setText("No donors available...");
+                                textNoDonors.setVisibility(View.VISIBLE);
                             }
+                            progressDialog.dismiss();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

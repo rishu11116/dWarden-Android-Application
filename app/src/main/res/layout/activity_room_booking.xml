@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
             <LinearLayout
@@ -566,13 +566,14 @@
                 android:inputType="number"/>
         </LinearLayout>
             <Button
-                android:layout_width="501dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:textSize="20sp"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Book Room"
                 android:textStyle="bold"
+                android:layout_gravity="center"
                 android:id="@+id/check_availability_button"
                 android:background="#fc020a"
                 android:textColor="#ffffff" />

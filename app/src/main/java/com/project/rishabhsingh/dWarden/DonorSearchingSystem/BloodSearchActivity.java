@@ -2,8 +2,8 @@ package com.project.rishabhsingh.dWarden.DonorSearchingSystem;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.project.rishabhsingh.dWarden.R;
 
@@ -22,10 +22,4 @@ public class BloodSearchActivity extends AppCompatActivity {
         fragmentTransaction.add(R.id.fragment_donorList,donorListFragment);
         fragmentTransaction.commit();
     }
-
-//    @Override
-//    public void SearchClicked() {
-//        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-//        fragmentTransaction.replace(R.id.fragment_donorList,new DonorListFragment(this),null);
-//    }
 }
